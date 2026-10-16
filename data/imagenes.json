@@ -1,0 +1,29 @@
+{
+  "_ayuda": "Biblioteca de fotos con licencia libre (Wikimedia Commons). La IA elige una clave para cada noticia; si ninguna sirve, el robot busca otra foto libre en Commons y la agrega sola al final de esta lista. 'archivo' es el nombre del archivo en Commons.",
+  "lista": [
+    { "clave": "carrasco", "descripcion": "Aeropuerto Internacional de Carrasco, Montevideo", "alt": "Vista aérea del Aeropuerto Internacional de Carrasco", "archivo": "Aeropuerto_Carrasco.jpg", "temas": ["vuelos", "aeropuerto", "uruguay"] },
+    { "clave": "miami", "descripcion": "Skyline de Miami, Estados Unidos", "alt": "Skyline de Miami sobre la bahía", "archivo": "Miami,_Florida,_Skyline_4.jpg", "temas": ["estados unidos", "miami"] },
+    { "clave": "florianopolis", "descripcion": "Florianópolis, Santa Catarina, Brasil", "alt": "Vista de Florianópolis desde el Morro da Cruz", "archivo": "Morro_da_Cruz,_Florianópolis_-_SC,_Brazil_-_panoramio_(cropped).jpg", "temas": ["brasil", "playa", "florianopolis"] },
+    { "clave": "rio", "descripcion": "Río de Janeiro, Brasil", "alt": "Vista panorámica de Río de Janeiro", "archivo": "Cidade_Maravilhosa.jpg", "temas": ["brasil", "rio de janeiro"] },
+    { "clave": "buenos-aires", "descripcion": "Puerto Madero, Buenos Aires, Argentina", "alt": "Puerto Madero en Buenos Aires", "archivo": "Puerto_Madero,_Buenos_Aires_(40689219792)_(cropped).jpg", "temas": ["argentina", "buenos aires"] },
+    { "clave": "bariloche", "descripcion": "Bariloche y el lago Nahuel Huapi, Patagonia argentina", "alt": "Catedral de Bariloche vista desde el lago Nahuel Huapi", "archivo": "Catedral_desde_el_Lago_Nahuel_Huapi_-_panoramio.jpg", "temas": ["argentina", "patagonia", "nieve"] },
+    { "clave": "puerto-montevideo", "descripcion": "Puerto y Ciudad Vieja de Montevideo", "alt": "Vista aérea de la Ciudad Vieja y el puerto de Montevideo", "archivo": "(Puerto_de_Montevideo)_Cuidad_Vieja_y_Puerto_de_Montevideo_131003-0879-jikatu_(10099992434)_(cropped).jpg", "temas": ["cruceros", "puerto", "uruguay", "buquebus"] },
+    { "clave": "punta-del-este", "descripcion": "Costa de Punta del Este, Uruguay", "alt": "Costa de Punta del Este", "archivo": "Пунта-дель-Эсте.jpg", "temas": ["uruguay", "playa", "turismo receptivo"] },
+    { "clave": "camboriu", "descripcion": "Balneário Camboriú, Brasil", "alt": "Costanera de la Praia Central en Balneário Camboriú", "archivo": "Orla_da_Praia_Central,_Balneário_Camboriú_SC.JPG", "temas": ["brasil", "playa"] },
+    { "clave": "buzios", "descripcion": "Búzios, Río de Janeiro, Brasil", "alt": "Iglesia de Sant'Anna en Búzios", "archivo": "Vista_da_Igreja_de_Sant'Anna_(Armação_dos_Búzios).jpg", "temas": ["brasil", "playa"] },
+    { "clave": "salvador", "descripcion": "Salvador de Bahía, Brasil", "alt": "Vista de Salvador de Bahía", "archivo": "Salvador_BA_(cropped)_2.jpg", "temas": ["brasil", "nordeste"] },
+    { "clave": "punta-cana", "descripcion": "Punta Cana, República Dominicana, Caribe", "alt": "Marina de Cap Cana en Punta Cana", "archivo": "Cap_Cana_Marina_Dominican_Republic.jpg", "temas": ["caribe", "playa"] },
+    { "clave": "madrid", "descripcion": "Madrid, España, Europa", "alt": "Vista de Madrid desde la Plaza de España", "archivo": "Madrid_-_Sky_Bar_360º_(Hotel_Riu_Plaza_España),_vistas_19.jpg", "temas": ["europa", "españa"] },
+    { "clave": "santiago", "descripcion": "Santiago de Chile", "alt": "Palacio de La Moneda en Santiago de Chile", "archivo": "Palacio_de_La_Moneda_-_miguelreflex.jpg", "temas": ["chile"] }
+  ],
+  "porCategoria": {
+    "vuelos": "carrasco",
+    "cruceros": "puerto-montevideo",
+    "requisitos": "carrasco",
+    "destinos": "florianopolis",
+    "datos": "rio",
+    "turismo-receptivo": "punta-del-este",
+    "ofertas": "punta-cana",
+    "guias": "florianopolis"
+  }
+}

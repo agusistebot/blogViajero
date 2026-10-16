@@ -1,0 +1,40 @@
+{
+  "_ayuda": "Ranking de destinos más elegidos. Se edita a mano cuando salen nuevas estadísticas oficiales.",
+  "titulo": "Los 10 destinos más elegidos por los uruguayos",
+  "periodo": "2026",
+  "intro": "Armado con las estadísticas oficiales de viajes al exterior del primer semestre de 2026, los destinos más vendidos por las agencias y la oferta de vuelos directos desde Carrasco.",
+  "lista": [
+    { "nombre": "Buenos Aires", "pais": "Argentina", "imagen": "buenos-aires", "texto": "A una hora de vuelo o un par de horas de Buquebus. Teatro, gastronomía, compras y fútbol.", "porque": "Argentina recibió 718.583 viajes de uruguayos en el semestre, casi 6 de cada 10." },
+    { "nombre": "Florianópolis", "pais": "Brasil · Santa Catarina", "imagen": "florianopolis", "texto": "Más de 40 playas para todos los gustos. Se llega en auto, en ómnibus o con el vuelo directo de Sky.", "porque": "Es el destino de Brasil con más demanda entre los uruguayos, y Brasil es el país que más crece." },
+    { "nombre": "Río de Janeiro", "pais": "Brasil", "imagen": "rio", "texto": "Copacabana, Ipanema, el Cristo y el Pan de Azúcar. Ciudad y playa en un mismo viaje.", "porque": "Tiene vuelo directo desde Carrasco, con refuerzos en octubre, y estuvo en el top de ventas de vacaciones." },
+    { "nombre": "Balneário Camboriú", "pais": "Brasil · Santa Catarina", "imagen": "camboriu", "texto": "Rambla, edificios frente al mar, el Parque Unipraias y vida nocturna. También es escala de cruceros MSC.", "porque": "Está entre los destinos más pedidos para la Semana de Turismo 2026." },
+    { "nombre": "Miami", "pais": "Estados Unidos", "imagen": "miami", "texto": "Compras, playa y puerta de entrada a Orlando y sus parques. Desde diciembre vuelve el vuelo directo diario.", "porque": "Los viajes a Norteamérica pasaron de 27.113 a 40.164 en un año." },
+    { "nombre": "Búzios", "pais": "Brasil · Río de Janeiro", "imagen": "buzios", "texto": "Península de playas tranquilas, la Rua das Pedras y pousadas con encanto, a dos horas y media de Río.", "porque": "Figura entre los destinos de Brasil con más demanda desde Uruguay en 2026." },
+    { "nombre": "Salvador de Bahía", "pais": "Brasil · Bahía", "imagen": "salvador", "texto": "El Pelourinho, la cultura afrobrasileña y playas cálidas todo el año, más Morro de São Paulo y Praia do Forte.", "porque": "Tiene vuelo directo desde Carrasco y es uno de los destinos brasileños más elegidos." },
+    { "nombre": "Punta Cana", "pais": "República Dominicana", "imagen": "punta-cana", "texto": "Todo incluido frente al Caribe, ideal para familias y lunas de miel. Se llega con escala en Panamá.", "porque": "Está en el top 10 de ventas de las agencias uruguayas, junto con Cancún." },
+    { "nombre": "Madrid", "pais": "España", "imagen": "madrid", "texto": "La puerta de entrada a Europa para los uruguayos, con museos, tapas y trenes rápidos a toda España.", "porque": "Es la única ruta directa a Europa: 11 vuelos semanales entre Iberia y Air Europa." },
+    { "nombre": "Santiago de Chile", "pais": "Chile", "imagen": "santiago", "texto": "Cordillera, centros de esquí en invierno, viñedos y compras, con vuelos directos de Latam, JetSMART y Sky.", "porque": "Chile recibió 46.467 viajes de uruguayos en el primer semestre." }
+  ],
+  "paises": {
+    "titulo": "A qué países viajaron los uruguayos",
+    "subtitulo": "Cantidad de viajes en el primer semestre de 2026.",
+    "datos": [
+      { "nombre": "Argentina", "valor": 718583 },
+      { "nombre": "Brasil", "valor": 389650 },
+      { "nombre": "Chile", "valor": 46467 },
+      { "nombre": "Norteamérica", "valor": 40164 }
+    ]
+  },
+  "cifras": [
+    { "valor": "1,23 M", "texto": "viajes al exterior (1er semestre 2026)" },
+    { "valor": "US$ 777 M", "texto": "de gasto total" },
+    { "valor": "+56.970", "texto": "viajes más a Brasil que en 2025" },
+    { "valor": "152", "texto": "vuelos semanales en Carrasco (octubre)" }
+  ],
+  "fuentes": [
+    { "nombre": "Prensa Mercosur", "url": "https://prensamercosur.org/2026/09/04/uruguay-los-uruguayos-gastaron-us-777-millones-en-viajes-al-exterior-y-brasil-gana-terreno-frente-a-argentina/" },
+    { "nombre": "Cooltivarte", "url": "https://cooltivarte.com/portal/tendencias-de-viaje-en-2026-destinos-internacionales-que-mas-eligen-los-uruguayos-y-que-tener-en-cuenta/" },
+    { "nombre": "Urubus", "url": "https://urubus.com.uy/blog/viajes-semana-de-turismo-2026/" },
+    { "nombre": "Cámara de Comercio de la Aeronáutica", "url": "https://camaero.org/noticias/vacaciones-de-invierno-donde-van-los-uruguayos-que-optan-por-viajes-internacionales/" }
+  ]
+}

@@ -1,0 +1,206 @@
+[
+  {
+    "id": "2026-10-14-carrasco-152-frecuencias",
+    "slug": "carrasco-152-frecuencias-semanales-octubre-brasil",
+    "titulo": "Carrasco opera 152 frecuencias semanales en octubre: Brasil concentra casi el 39% de los vuelos",
+    "bajada": "Once aerolíneas conectan Montevideo con 15 destinos directos en octubre. Brasil suma seis ciudades y hay refuerzos a Río de Janeiro y Bogotá.",
+    "categoria": "vuelos",
+    "etiquetas": ["Carrasco", "Brasil", "Iberia", "Air Europa", "Avianca"],
+    "destino": "Montevideo",
+    "fecha": "2026-10-14T10:00:00-03:00",
+    "puntosClave": [
+      "152 frecuencias semanales, 11 aerolíneas y 15 destinos directos desde Carrasco en octubre.",
+      "Brasil es el mercado principal: seis ciudades y cerca del 39% de los vuelos.",
+      "Madrid tiene 11 vuelos directos por semana entre Iberia (7) y Air Europa (4).",
+      "Hay refuerzos previstos a Río de Janeiro y Bogotá para la última semana del mes."
+    ],
+    "cuerpo": "El Aeropuerto Internacional de Carrasco tiene programadas **152 frecuencias semanales** durante octubre, operadas por **11 aerolíneas** hacia **15 destinos**: Madrid, Panamá, Asunción, Santiago de Chile, Lima, San Pablo, Buenos Aires, Río de Janeiro, Bogotá, Recife, Belo Horizonte, Fortaleza, Salvador de Bahía, Rivera y Salto.\n\nBrasil es el mercado principal: seis ciudades y unas 59 frecuencias semanales, cerca del 39% del total. Para la última semana del mes hay refuerzos previstos en las rutas a Río de Janeiro y Bogotá.\n\n## Quién vuela a dónde\n\n- **Madrid:** Iberia con 7 vuelos directos por semana y Air Europa con 4.\n- **Bogotá:** Avianca con 4 frecuencias semanales.\n- **Aerolíneas que operan:** Iberia, Air Europa, Copa, Paranair, Latam, Gol, Aerolíneas Argentinas, JetSMART, Avianca, Azul y Sky.\n\n## Qué significa para vos\n\nSi vas a Brasil, tenés más opciones directas que a cualquier otro país. Para Europa, Madrid sigue siendo la única puerta directa: conviene comparar Iberia y Air Europa y, si tu destino final es otra ciudad, mirar las conexiones desde Barajas.",
+    "faq": [
+      { "pregunta": "¿Cuántos destinos directos tiene el Aeropuerto de Carrasco en octubre de 2026?", "respuesta": "Quince destinos directos, operados por 11 aerolíneas con 152 frecuencias semanales." },
+      { "pregunta": "¿Qué aerolíneas vuelan directo de Montevideo a Madrid?", "respuesta": "Iberia, con 7 vuelos semanales, y Air Europa, con 4." }
+    ],
+    "imagen": { "clave": "carrasco" },
+    "fuentes": [
+      { "nombre": "Ámbito", "url": "https://www.ambito.com/uruguay/el-aeropuerto-carrasco-tendra-152-frecuencias-semanales-casi-40-los-vuelos-brasil-n6333369" },
+      { "nombre": "Prensa Latina", "url": "https://www.prensa-latina.cu/2026/10/14/conexiones-con-15-destinos-desde-aeropuerto-de-carrasco-uruguay/" }
+    ],
+    "origen": "manual"
+  },
+  {
+    "id": "2026-10-13-paranair-mantenimiento",
+    "slug": "paranair-suspende-vuelos-mantenimiento-carrasco",
+    "titulo": "Paranair suspendió sus vuelos por mantenimiento y Carrasco operó 138 frecuencias en lugar de 152",
+    "bajada": "La aerolínea paraguaya frenó operaciones entre el 30 de setiembre y el 12 de octubre. La reparación de su único avión se extiende hasta el 18 de octubre.",
+    "categoria": "vuelos",
+    "etiquetas": ["Paranair", "Rivera", "Salto", "Asunción"],
+    "destino": "Asunción",
+    "fecha": "2026-10-13T12:00:00-03:00",
+    "puntosClave": [
+      "Paranair suspendió operaciones del 30 de setiembre al 12 de octubre por mantenimiento.",
+      "La reparación de su único avión disponible sigue hasta el 18 de octubre.",
+      "La ruta a Rivera solo tenía pasajes para el 28 de octubre y la de Salto no estaba activa."
+    ],
+    "cuerpo": "La aerolínea paraguaya suspendió sus operaciones entre el 30 de setiembre y el 12 de octubre por el mantenimiento de un avión. Mientras estuvo detenida, el aeropuerto operó 138 frecuencias semanales en vez de las 152 previstas.\n\nLa empresa informó que la reparación de su único avión disponible se extiende hasta el 18 de octubre. En su web, la ruta a Asunción seguía a la venta, a Rivera solo había pasajes para el 28 de octubre y la ruta a Salto no estaba activa.\n\n## Qué significa para vos\n\n**Si tenés un pasaje con Paranair, revisá el estado de tu vuelo antes de ir al aeropuerto.** Si te cancelaron el vuelo, pedí por escrito las opciones de reprogramación o reembolso, y si compraste con agencia, que sea la agencia la que gestione el cambio.",
+    "faq": [
+      { "pregunta": "¿Hasta cuándo dura el mantenimiento del avión de Paranair?", "respuesta": "Según la empresa, la reparación de su único avión disponible se extiende hasta el 18 de octubre de 2026." }
+    ],
+    "imagen": { "clave": "carrasco" },
+    "fuentes": [
+      { "nombre": "El País / GDA", "url": "https://gda.com/detalle-de-la-noticia/?article=6202810" }
+    ],
+    "origen": "manual"
+  },
+  {
+    "id": "2026-08-20-miami-porto-alegre",
+    "slug": "vuelo-directo-diario-montevideo-miami-azul-porto-alegre",
+    "titulo": "American Airlines vuelve a volar todos los días a Miami y Azul retoma Montevideo–Porto Alegre",
+    "bajada": "El vuelo directo diario a Miami vuelve desde el 3 de diciembre de 2026. Azul reanuda la ruta a Porto Alegre el 14 de diciembre con dos frecuencias semanales.",
+    "categoria": "vuelos",
+    "etiquetas": ["Estados Unidos", "Brasil", "Nuevas rutas", "American Airlines", "Azul"],
+    "destino": "Miami",
+    "fecha": "2026-08-20T10:00:00-03:00",
+    "actualizado": "2026-10-10T10:00:00-03:00",
+    "puntosClave": [
+      "American Airlines: vuelo directo diario Montevideo–Miami del 3 de diciembre de 2026 al 2 de marzo de 2027.",
+      "Después sigue hasta el 28 de marzo con tres vuelos por semana, según el Mintur.",
+      "Azul: Montevideo–Porto Alegre desde el 14 de diciembre, lunes y viernes."
+    ],
+    "cuerpo": "**American Airlines** retomará el vuelo directo diario Montevideo–Miami **desde el 3 de diciembre de 2026 hasta el 2 de marzo de 2027**. Después, según el Ministerio de Turismo, la conexión sigue hasta el 28 de marzo con tres vuelos por semana.\n\nLa brasileña **Azul** reanuda la ruta Montevideo–Porto Alegre **a partir del 14 de diciembre**, con dos frecuencias semanales (lunes y viernes). Desde Porto Alegre hay conexiones a San Pablo, Río de Janeiro, Curitiba y Florianópolis.\n\nEl ministro de Turismo, Pablo Menoni, destacó que la reactivación amplía las oportunidades para el turismo, el comercio y los negocios con el sur de Brasil.\n\n## Qué significa para vos\n\nPara Miami y Orlando, el vuelo directo ahorra la escala en Panamá o San Pablo durante todo el verano. Recordá que para entrar a Estados Unidos necesitás visa vigente. Para el sur de Brasil, Porto Alegre vuelve a ser una opción rápida para conectar con Florianópolis.",
+    "faq": [
+      { "pregunta": "¿Cuándo vuelve el vuelo directo Montevideo–Miami?", "respuesta": "American Airlines lo retoma con frecuencia diaria desde el 3 de diciembre de 2026 hasta el 2 de marzo de 2027, y luego con tres vuelos semanales hasta el 28 de marzo." },
+      { "pregunta": "¿Qué días vuela Azul de Montevideo a Porto Alegre?", "respuesta": "Lunes y viernes, a partir del 14 de diciembre de 2026." }
+    ],
+    "imagen": { "clave": "miami" },
+    "fuentes": [
+      { "nombre": "Durazno Digital, con datos del Mintur", "url": "https://www.duraznodigital.uy/2026/08/aeropuerto-de-carrasco-incorpora-vuelos.html" }
+    ],
+    "origen": "manual"
+  },
+  {
+    "id": "2026-09-04-turismo-emisivo-semestre",
+    "slug": "uruguayos-viajes-exterior-primer-semestre-2026-brasil-crece",
+    "titulo": "Los uruguayos hicieron 1,23 millones de viajes al exterior en el primer semestre y Brasil es el que más crece",
+    "bajada": "Entre enero y junio de 2026 los residentes en Uruguay gastaron US$ 776,9 millones viajando. Argentina sigue primera, pero Brasil sumó casi 57.000 viajes más.",
+    "categoria": "datos",
+    "etiquetas": ["Estadísticas", "Argentina", "Brasil", "Chile"],
+    "destino": "Uruguay",
+    "fecha": "2026-09-04T10:00:00-03:00",
+    "puntosClave": [
+      "Más de 1,23 millones de viajes al exterior y US$ 776,9 millones de gasto entre enero y junio.",
+      "Argentina: 718.583 viajes, casi seis de cada diez salidas.",
+      "Brasil: 389.650 viajes, 56.970 más que en el mismo período de 2025.",
+      "Norteamérica pasó de 27.113 a 40.164 viajes."
+    ],
+    "cuerpo": "Entre enero y junio de 2026, los residentes en Uruguay hicieron **más de 1,23 millones de viajes al exterior** y gastaron **US$ 776,9 millones**.\n\n**Argentina** sigue primera con 718.583 viajes, casi seis de cada diez salidas, aunque perdió viajeros. **Brasil** es el que más creció: 389.650 viajes, 56.970 más que en el mismo período de 2025.\n\nNorteamérica pasó de 27.113 a 40.164 viajes, Europa también creció y Chile recibió 46.467 viajes, con un gasto de US$ 33,7 millones.\n\n## Qué significa para vos\n\nMás demanda hacia Brasil suele traducirse en más vuelos y paquetes, pero también en precios más altos en temporada. Si pensás ir en enero o en Turismo, conviene reservar con tiempo.",
+    "faq": [
+      { "pregunta": "¿Cuántos viajes al exterior hicieron los uruguayos en el primer semestre de 2026?", "respuesta": "Más de 1,23 millones de viajes, con un gasto total de US$ 776,9 millones." },
+      { "pregunta": "¿A qué país viajan más los uruguayos?", "respuesta": "A Argentina, con 718.583 viajes en el semestre. Brasil es el segundo y el que más creció." }
+    ],
+    "imagen": { "clave": "rio" },
+    "fuentes": [
+      { "nombre": "Prensa Mercosur", "url": "https://prensamercosur.org/2026/09/04/uruguay-los-uruguayos-gastaron-us-777-millones-en-viajes-al-exterior-y-brasil-gana-terreno-frente-a-argentina/" }
+    ],
+    "origen": "manual"
+  },
+  {
+    "id": "2026-09-22-lonely-planet-bariloche",
+    "slug": "bariloche-lonely-planet-best-in-travel-2027",
+    "titulo": "Bariloche y los lagos, el destino sudamericano en la lista de Lonely Planet para 2027",
+    "bajada": "Lonely Planet publicó Best in Travel 2027 con 25 destinos y 25 experiencias. Desde Uruguay, Bariloche se combina fácil con vuelos vía Buenos Aires.",
+    "categoria": "destinos",
+    "etiquetas": ["Argentina", "Patagonia", "Rankings", "Lonely Planet"],
+    "destino": "Bariloche",
+    "fecha": "2026-09-22T10:00:00-03:00",
+    "puntosClave": [
+      "Bariloche y la región de los lagos es el destino de Sudamérica en Best in Travel 2027.",
+      "La lista incluye Quebec, el Véneto, León, Šibenik, Bocas del Toro, Omán y Okinawa, entre otros.",
+      "Desde Uruguay se llega con conexión en Buenos Aires."
+    ],
+    "cuerpo": "Lonely Planet publicó **Best in Travel 2027**, con 25 destinos y 25 experiencias elegidos por su red de expertos. En Sudamérica aparece **Bariloche y la región de los lagos**.\n\nLos 25 destinos de la lista también incluyen Quebec, el Véneto, León (España), Šibenik (Croacia), Bocas del Toro (Panamá), Granada (Nicaragua), Montserrat, Omán, Rabat, Okinawa, Da Nang y Fulidhoo, en Maldivas. Entre las experiencias hay vino en el Valle de Guadalupe (México) y un baño polar en la Antártida.\n\n## Qué significa para vos\n\nBariloche es una escapada corta desde Uruguay: vuelo a Buenos Aires y conexión a la Patagonia. En invierno es nieve y esquí; en verano, lagos, trekking y chocolate. Cuanto más difusión tiene un destino, más rápido se llenan los vuelos de temporada alta.",
+    "faq": [
+      { "pregunta": "¿Qué destino de Sudamérica está en Best in Travel 2027 de Lonely Planet?", "respuesta": "Bariloche y la región de los lagos, en la Patagonia argentina." }
+    ],
+    "imagen": { "clave": "bariloche" },
+    "fuentes": [
+      { "nombre": "CNN", "url": "https://www.cnn.com/2026/09/22/travel/lonely-planet-best-in-travel-2027" }
+    ],
+    "origen": "manual"
+  },
+  {
+    "id": "2026-10-05-temporada-cruceros",
+    "slug": "temporada-cruceros-2026-2027-montevideo-punta-del-este",
+    "titulo": "Temporada de cruceros 2026-2027: las salidas que pasan por Montevideo y Punta del Este",
+    "bajada": "La temporada va de diciembre de 2026 a marzo de 2027, con Costa y MSC como navieras principales. Hay 12 salidas desde el puerto de Montevideo.",
+    "categoria": "cruceros",
+    "etiquetas": ["Cruceros", "Montevideo", "Punta del Este", "Costa", "MSC"],
+    "destino": "Montevideo",
+    "fecha": "2026-10-05T10:00:00-03:00",
+    "puntosClave": [
+      "La temporada de cruceros en Uruguay va de diciembre de 2026 a marzo de 2027.",
+      "Costa Serena hace 12 salidas desde Montevideo, con tarifas desde US$ 170.",
+      "El 2 de abril de 2027 sale un reposicionamiento de Montevideo a Savona, Italia."
+    ],
+    "cuerpo": "La temporada de cruceros por Uruguay va de **diciembre de 2026 a marzo de 2027**, con Costa y MSC como navieras principales. Estas son algunas salidas publicadas:\n\n- **Costa Serena** sale desde Montevideo con rutas como Montevideo–Punta del Este–Buenos Aires–Montevideo. Hay 12 salidas desde el puerto de Montevideo, con tarifas desde US$ 170.\n- **Costa Diadema:** Santos, Buenos Aires, Montevideo, Itajaí y Santos, con salidas semanales desde el 23 de diciembre hasta el 24 de febrero.\n- **MSC Seaview:** Santos, Camboriú, Montevideo, Buenos Aires y Santos, con salida el 10 de enero de 2027.\n- **Costa Serena a Europa:** el 2 de abril de 2027 sale un crucero de reposicionamiento desde Montevideo que termina en Savona, Italia.\n\nLos precios son de referencia, no incluyen tasas y cambian según la disponibilidad.\n\n## Qué significa para vos\n\nSalir desde Montevideo te ahorra el vuelo. Al comparar, sumá tasas portuarias, propinas y bebidas, que suelen no estar incluidas en la tarifa base.",
+    "faq": [
+      { "pregunta": "¿Cuándo es la temporada de cruceros en Uruguay?", "respuesta": "De diciembre de 2026 a marzo de 2027, con Costa y MSC como navieras principales." },
+      { "pregunta": "¿Hay cruceros que salgan desde Montevideo?", "respuesta": "Sí. Costa Serena tiene 12 salidas desde el puerto de Montevideo, con tarifas de referencia desde US$ 170 sin tasas." }
+    ],
+    "imagen": { "clave": "puerto-montevideo" },
+    "fuentes": [
+      { "nombre": "Cruceros.uy", "url": "https://www.cruceros.uy/pd-62-montevideo" }
+    ],
+    "origen": "manual"
+  },
+  {
+    "id": "2026-03-20-balance-verano",
+    "slug": "balance-temporada-verano-2026-turistas-gasto",
+    "titulo": "Verano 2026: llegaron menos turistas pero gastaron más y se quedaron más tiempo",
+    "bajada": "Entre diciembre y febrero ingresaron 1.301.913 turistas que dejaron US$ 928 millones, un 3% más que la temporada anterior.",
+    "categoria": "turismo-receptivo",
+    "etiquetas": ["Uruguay", "Punta del Este", "Mintur"],
+    "destino": "Uruguay",
+    "fecha": "2026-03-20T10:00:00-03:00",
+    "puntosClave": [
+      "1.301.913 turistas entre diciembre de 2025 y febrero de 2026, que dejaron US$ 928 millones (+3%).",
+      "Gasto promedio de US$ 713 por visitante (+11,9%) y estadía media de 8 noches (+8,7%).",
+      "Entre enero y marzo llegaron 13,6% menos visitantes, sobre todo por la caída de argentinos."
+    ],
+    "cuerpo": "Entre diciembre de 2025 y febrero de 2026 ingresaron **1.301.913 turistas**, que dejaron **US$ 928 millones**, un 3% más que la temporada anterior. El gasto promedio fue de US$ 713 por visitante (+11,9%) y la estadía media fue de 8 noches (+8,7%).\n\nEntre enero y marzo, en cambio, llegaron 1.181.795 visitantes, 13,6% menos que un año antes, sobre todo por la caída de los argentinos (−17,6%). Para la temporada 2026-2027, el sector espera una recuperación.\n\n## Qué significa para vos\n\nSi pensás veranear en la costa uruguaya, la menor llegada de turistas puede traducirse en más disponibilidad fuera de las semanas pico.",
+    "faq": [
+      { "pregunta": "¿Cuántos turistas llegaron a Uruguay en el verano 2026?", "respuesta": "1.301.913 turistas entre diciembre de 2025 y febrero de 2026, que dejaron US$ 928 millones." }
+    ],
+    "imagen": { "clave": "punta-del-este" },
+    "fuentes": [
+      { "nombre": "Ministerio de Turismo", "url": "https://www.gub.uy/ministerio-turismo/comunicacion/noticias/ingreso-divisas-uruguay-registro-incremento-temporada-verano-alcanzando-928" },
+      { "nombre": "El Observador", "url": "https://www.elobservador.com.uy/economia-y-empresas/temporada-2026-uruguay-recibio-186000-turistas-menos-que-el-verano-pasado-n6042998" }
+    ],
+    "origen": "manual"
+  },
+  {
+    "id": "2026-10-08-como-llegar-florianopolis",
+    "slug": "como-llegar-florianopolis-desde-uruguay-verano-2027",
+    "titulo": "Cómo llegar a Florianópolis este verano: avión directo, escala o ómnibus",
+    "bajada": "Las tres formas de llegar a Floripa desde Uruguay: el vuelo directo de Sky, conexiones vía San Pablo o Buenos Aires, y paquetes en ómnibus.",
+    "categoria": "guias",
+    "etiquetas": ["Brasil", "Florianópolis", "Cómo llegar"],
+    "destino": "Florianópolis",
+    "fecha": "2026-10-08T10:00:00-03:00",
+    "puntosClave": [
+      "Vuelo directo de Sky en 1 h 50 min; en octubre aparecía desde unos US$ 221.",
+      "Con escala: Gol, Latam y Aerolíneas Argentinas vía San Pablo o Buenos Aires.",
+      "En ómnibus hay paquetes con salidas el 2, 9, 16 y 23 de enero."
+    ],
+    "cuerpo": "Florianópolis sigue siendo el clásico del verano uruguayo y hay tres formas de llegar:\n\n- **Vuelo directo:** Sky tiene un vuelo de 1 h 50 min. En octubre aparecía desde unos US$ 221.\n- **Con escala:** Gol, Latam y Aerolíneas Argentinas vuelan vía San Pablo o Buenos Aires. Aerolíneas tiene 14 vuelos semanales Buenos Aires–Montevideo y 36 frecuencias semanales de Buenos Aires a Florianópolis en el verano 2027.\n- **Ómnibus:** hay paquetes en semicama con guía, cena y desayuno a bordo, pasando por Porto Alegre, con salidas el 2, 9, 16 y 23 de enero.\n\nLas tarifas aéreas cambian a diario. Usá estos valores como referencia y compará antes de comprar.\n\n## Qué significa para vos\n\nPara uruguayos alcanza con la cédula vigente para entrar a Brasil. Si vas en auto, llevá la libreta de propiedad y el seguro obligatorio para el Mercosur.",
+    "faq": [
+      { "pregunta": "¿Hay vuelo directo de Montevideo a Florianópolis?", "respuesta": "Sí, Sky opera un vuelo directo de aproximadamente 1 hora y 50 minutos." },
+      { "pregunta": "¿Qué documento necesita un uruguayo para viajar a Florianópolis?", "respuesta": "Alcanza con la cédula de identidad uruguaya vigente; también sirve el pasaporte." }
+    ],
+    "imagen": { "clave": "florianopolis" },
+    "fuentes": [
+      { "nombre": "Sir Chandler", "url": "https://www.sirchandler.com.ar/2026/09/aerolineas-argentinas-vuelos-y-novedades-del-verano-2027-chau-bogota/" },
+      { "nombre": "KAYAK", "url": "https://www.kayak.com.uy/vuelos/Uruguay-UY0/Florianopolis-Hercilio-Luz-FLN" },
+      { "nombre": "El Mundo Viajes", "url": "https://www.elmundoviajes.com.uy/paquetes_de_viajes/florianopolis-10-dias-salidas-verano-2027/" }
+    ],
+    "origen": "manual"
+  }
+]

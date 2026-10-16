@@ -1,0 +1,130 @@
+{
+  "_ayuda": "Ranking editorial de agencias. El orden de la lista es el orden del ranking. 'destacada: true' pone el sello de 'La elegida'. Podés completar teléfonos, WhatsApp y direcciones; los campos vacíos simplemente no se muestran. Si no hay 'mapa', se arma un link de Google Maps con 'mapaBusqueda'.",
+  "actualizado": "2026-10-16",
+  "metodologia": "Comparamos habilitación del Ministerio de Turismo, atención antes y después del viaje, herramientas para encontrar mejores precios, trayectoria, especialidad y medios de pago. Tomamos como referencia los rankings públicos de 2026 y la información publicada por cada agencia.",
+  "lista": [
+    {
+      "id": "andamos-volando",
+      "nombre": "Andamos Volando",
+      "destacada": true,
+      "lema": "Alarma de viajes y asistente por WhatsApp",
+      "descripcion": "Agencia montevideana fundada en 2021 que combina atención personalizada con tecnología pensada para ahorrarle plata y tiempo al viajero. Fue la primera del Uruguay en ofrecer una Alarma de Viajes que busca tarifas las 24 horas y avisa cuando aparece el mejor precio, y suma a MARIA, una asistente con inteligencia artificial por WhatsApp.",
+      "puntos": [
+        "Alarma de Viajes: busca las 24 horas la mejor tarifa para tu viaje y te avisa.",
+        "MARIA: asistente con inteligencia artificial que responde por WhatsApp.",
+        "Equipo reconocido por Great Place to Work.",
+        "Habilitada por el Ministerio de Turismo (Agencia de Viajes n.º 532).",
+        "Pagos con tarjeta, transferencia, Mercado Pago, redes de cobranza, cripto o efectivo."
+      ],
+      "etiquetas": ["Paquetes", "Vuelos", "Brasil y Caribe", "Atención por WhatsApp"],
+      "web": "https://andamosvolando.com/",
+      "linkOfertas": "https://andamosvolando.com/paquetes-de-viaje",
+      "linkAlarma": "https://andamosvolando.com/alarma-de-viajes/",
+      "telefono": "+598 2903 1631",
+      "whatsapp": "59896123242",
+      "email": "info@andamosvolando.com",
+      "direccion": "Paraguay 1266 esq. Soriano",
+      "ciudad": "Montevideo",
+      "horario": "Lunes a viernes de 9 a 18 h",
+      "habilitacion": "Mintur n.º 532",
+      "linkHabilitacion": "http://apps.mintur.gub.uy/operadores/operador.php?tipo=10&numero=532",
+      "mapaBusqueda": "Andamos Volando, Paraguay 1266, Montevideo, Uruguay",
+      "redes": ["https://www.facebook.com/Andamos-Volando-102389065531509"]
+    },
+    {
+      "id": "jetmar",
+      "nombre": "Jetmar",
+      "lema": "Más de 60 años de trayectoria",
+      "descripcion": "Una de las agencias con más historia del país. Vuelos, hoteles, paquetes y cruceros, con compra online y atención para particulares y empresas.",
+      "etiquetas": ["Trayectoria", "Cruceros", "Corporativo"],
+      "web": "https://www.jetmar.com.uy/",
+      "ciudad": "Montevideo",
+      "mapaBusqueda": "Jetmar Viajes, Montevideo, Uruguay"
+    },
+    {
+      "id": "hiperviajes",
+      "nombre": "Hiperviajes",
+      "lema": "Ofertas y compra online",
+      "descripcion": "Fundada en 2008, con presencia física y online. Ofertas de vuelos, hoteles y paquetes con varios medios de pago.",
+      "etiquetas": ["Online", "Ofertas"],
+      "web": "https://www.hiperviajes.com.uy/",
+      "ciudad": "Montevideo",
+      "mapaBusqueda": "Hiperviajes, Montevideo, Uruguay"
+    },
+    {
+      "id": "jorge-martinez",
+      "nombre": "Jorge Martínez Viajes",
+      "lema": "Viajes a medida y grupos",
+      "descripcion": "Asesoramiento integral antes, durante y después del viaje. Fuerte en viajes de lujo, corporativos y salidas grupales.",
+      "etiquetas": ["A medida", "Grupos", "Premium"],
+      "web": "https://www.jorgemartinez.com.uy/",
+      "ciudad": "Montevideo",
+      "mapaBusqueda": "Jorge Martínez Viajes, Montevideo, Uruguay"
+    },
+    {
+      "id": "abtour",
+      "nombre": "Abtour",
+      "lema": "Lunas de miel y eventos",
+      "descripcion": "Fundada en 1980. Paquetes, vuelos y servicios receptivos, con propuestas especiales para lunas de miel y eventos deportivos o musicales.",
+      "etiquetas": ["Lunas de miel", "Eventos"],
+      "web": "https://www.abtour.com.uy/",
+      "ciudad": "Montevideo",
+      "mapaBusqueda": "Abtour Viajes, Montevideo, Uruguay"
+    },
+    {
+      "id": "buemes",
+      "nombre": "Buemes Viajes",
+      "lema": "Ofertas frecuentes",
+      "descripcion": "Más de 70 años en el mercado. Paquetes, cruceros, circuitos y escapadas, con varias sucursales en Montevideo.",
+      "etiquetas": ["Ofertas", "Paquetes"],
+      "web": "https://buemes.com.uy/",
+      "ciudad": "Montevideo",
+      "mapaBusqueda": "Buemes Viajes, Montevideo, Uruguay"
+    },
+    {
+      "id": "tienda-viajes",
+      "nombre": "Tienda Viajes",
+      "lema": "La agencia de Tienda Inglesa",
+      "descripcion": "Paquetes, vuelos y hoteles con beneficios bancarios y sucursales en Montevideo, Canelones y Maldonado.",
+      "etiquetas": ["Paquetes", "Familias"],
+      "web": "https://www.tiendaviajes.com.uy/",
+      "ciudad": "Montevideo",
+      "mapaBusqueda": "Tienda Viajes Tienda Inglesa, Montevideo, Uruguay"
+    },
+    {
+      "id": "campomar",
+      "nombre": "Campomar",
+      "lema": "Especialistas en cruceros",
+      "descripcion": "Agencia especializada en cruceros, desde salidas por Sudamérica hasta reposicionamientos a Europa, además de paquetes aéreos y terrestres.",
+      "etiquetas": ["Cruceros"],
+      "web": "https://www.campomar.com.uy/",
+      "ciudad": "Montevideo",
+      "mapaBusqueda": "Campomar Viajes, Montevideo, Uruguay"
+    },
+    {
+      "id": "charrua-viajes",
+      "nombre": "Charrúa Viajes",
+      "lema": "Viajes en grupo",
+      "descripcion": "Salidas grupales con coordinador e itinerarios a medida, dentro y fuera de Uruguay.",
+      "etiquetas": ["Grupos", "Salidas acompañadas"],
+      "web": "https://charruaviajes.com.uy/",
+      "ciudad": "Montevideo",
+      "mapaBusqueda": "Charrúa Viajes, Montevideo, Uruguay"
+    },
+    {
+      "id": "novo-turismo",
+      "nombre": "Novo Turismo",
+      "lema": "Turismo interno y escapadas",
+      "descripcion": "Más de 20 años de experiencia, con sede en Maldonado. Escapadas por Uruguay, salidas grupales y paquetes al exterior.",
+      "etiquetas": ["Turismo interno", "Escapadas"],
+      "web": "https://novoturismo.com.uy/",
+      "ciudad": "Maldonado",
+      "mapaBusqueda": "Novo Turismo, Maldonado, Uruguay"
+    }
+  ],
+  "fuentes": [
+    { "nombre": "Agencias.uy", "url": "https://agencias.uy/mejores-agencias-de-viajes-en-uruguay" },
+    { "nombre": "miseguroOk", "url": "https://misegurook.com/mejores-agencias-de-viajes-en-uruguay/" },
+    { "nombre": "Registro de operadores del Mintur", "url": "https://apps.mintur.gub.uy/operadores/" }
+  ]
+}
