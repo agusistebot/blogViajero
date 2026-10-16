@@ -1,30 +1,102 @@
 {
   "_ayuda": "Fuentes que el robot lee en cada ejecución. 'google_news' arma búsquedas en Google Noticias (cubre El País, El Observador, Montevideo Portal, Subrayado, Telemundo, Ámbito, Clarín, etc.). 'rss' son feeds directos. Podés agregar o quitar líneas sin tocar el código; si un feed falla, se saltea.",
   "google_news": [
-    { "q": "\"Aeropuerto de Carrasco\" vuelos", "region": "UY" },
-    { "q": "vuelos Montevideo nueva ruta", "region": "UY" },
-    { "q": "aerolínea Uruguay vuelos cancelados OR suspendidos", "region": "UY" },
-    { "q": "uruguayos viajar requisitos", "region": "UY" },
-    { "q": "turismo emisivo Uruguay", "region": "UY" },
-    { "q": "cruceros Montevideo OR \"Punta del Este\" temporada", "region": "UY" },
-    { "q": "Ministerio de Turismo Uruguay", "region": "UY" },
-    { "q": "Buquebus OR Colonia Express OR \"Cacciola\"", "region": "UY" },
-    { "q": "pasaporte uruguayo OR \"documento\" viajar Brasil Argentina", "region": "UY" },
-    { "q": "Brasil turismo uruguayos Florianópolis OR Camboriú", "region": "UY" },
-    { "q": "Aerolíneas Argentinas OR JetSMART OR Flybondi Montevideo", "region": "AR" },
-    { "q": "LATAM OR GOL OR Azul vuelos Uruguay", "region": "BR" },
-    { "q": "Copa Airlines OR Iberia OR \"Air Europa\" Montevideo", "region": "UY" },
-    { "q": "dólar tarjeta compras exterior Uruguay viajeros", "region": "UY" },
-    { "q": "requisitos de entrada Estados Unidos OR Europa ETIAS latinoamericanos", "region": "UY" },
-    { "q": "Montevideo flights new route", "region": "US", "idioma": "en" },
-    { "q": "South America airline route launch", "region": "US", "idioma": "en" },
-    { "q": "ETIAS OR \"Entry/Exit System\" travelers update", "region": "US", "idioma": "en" }
+    {
+      "q": "\"Aeropuerto de Carrasco\" vuelos",
+      "region": "UY"
+    },
+    {
+      "q": "vuelos Montevideo nueva ruta",
+      "region": "UY"
+    },
+    {
+      "q": "aerolínea Uruguay vuelos cancelados OR suspendidos",
+      "region": "UY"
+    },
+    {
+      "q": "uruguayos viajar requisitos",
+      "region": "UY"
+    },
+    {
+      "q": "turismo emisivo Uruguay",
+      "region": "UY"
+    },
+    {
+      "q": "cruceros Montevideo OR \"Punta del Este\" temporada",
+      "region": "UY"
+    },
+    {
+      "q": "Ministerio de Turismo Uruguay",
+      "region": "UY"
+    },
+    {
+      "q": "Buquebus OR Colonia Express OR \"Cacciola\"",
+      "region": "UY"
+    },
+    {
+      "q": "pasaporte uruguayo OR \"documento\" viajar Brasil Argentina",
+      "region": "UY"
+    },
+    {
+      "q": "Brasil turismo uruguayos Florianópolis OR Camboriú",
+      "region": "UY"
+    },
+    {
+      "q": "Aerolíneas Argentinas OR JetSMART OR Flybondi Montevideo",
+      "region": "AR"
+    },
+    {
+      "q": "LATAM OR GOL OR Azul vuelos Uruguay",
+      "region": "BR"
+    },
+    {
+      "q": "Copa Airlines OR Iberia OR \"Air Europa\" Montevideo",
+      "region": "UY"
+    },
+    {
+      "q": "dólar tarjeta compras exterior Uruguay viajeros",
+      "region": "UY"
+    },
+    {
+      "q": "requisitos de entrada Estados Unidos OR Europa ETIAS latinoamericanos",
+      "region": "UY"
+    },
+    {
+      "q": "Montevideo flights new route",
+      "region": "US",
+      "idioma": "en"
+    },
+    {
+      "q": "South America airline route launch",
+      "region": "US",
+      "idioma": "en"
+    },
+    {
+      "q": "ETIAS OR \"Entry/Exit System\" travelers update",
+      "region": "US",
+      "idioma": "en"
+    },
+    {
+      "q": "site:aviacionline.com Uruguay OR Montevideo OR Argentina OR Brasil",
+      "region": "AR"
+    },
+    {
+      "q": "site:sirchandler.com.ar",
+      "region": "AR"
+    }
   ],
   "rss": [
-    { "nombre": "Aviacionline", "url": "https://www.aviacionline.com/feed/" },
-    { "nombre": "Sir Chandler", "url": "https://www.sirchandler.com.ar/feeds/posts/default?alt=rss" },
-    { "nombre": "Reportur", "url": "https://www.reportur.com/feed/" },
-    { "nombre": "Simple Flying", "url": "https://simpleflying.com/feed/" },
-    { "nombre": "Skift", "url": "https://skift.com/feed/" }
+    {
+      "nombre": "Reportur",
+      "url": "https://www.reportur.com/feed/"
+    },
+    {
+      "nombre": "Simple Flying",
+      "url": "https://simpleflying.com/feed/"
+    },
+    {
+      "nombre": "Skift",
+      "url": "https://skift.com/feed/"
+    }
   ]
 }

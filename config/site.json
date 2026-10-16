@@ -26,12 +26,13 @@
     "bing": ""
   },
   "ia": {
-    "_ayuda": "Configuración del robot que busca y redacta noticias. GEMINI_API_KEY va como 'secret' en GitHub, nunca acá.",
-    "modelos": ["gemini-flash-latest", "gemini-3.5-flash", "gemini-2.5-flash"],
+    "_ayuda": "Configuración del robot. GEMINI_API_KEY va como 'secret' en GitHub, nunca acá. 'modelos' vacío = el robot elige solo los modelos Flash más nuevos disponibles para tu clave (recomendado).",
+    "modelos": [],
     "maxNoticiasPorEjecucion": 4,
     "puntajeMinimo": 7,
     "horasHaciaAtras": 72,
-    "maxCandidatos": 120,
-    "usarBusquedaGoogle": true
+    "maxCandidatos": 80,
+    "usarBusquedaGoogle": true,
+    "minutosMaximos": 15
   }
 }

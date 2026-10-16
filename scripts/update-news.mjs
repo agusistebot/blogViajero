@@ -11,7 +11,7 @@
  */
 import { p, readJson, writeJson, slugify, titleSimilarity, fetchText, stripHtml, log } from './lib/util.mjs';
 import { leerFeed, googleNewsUrl } from './lib/rss.mjs';
-import { gemini } from './lib/gemini.mjs';
+import { gemini, modelosDisponibles } from './lib/gemini.mjs';
 import { buscarFotoLibre } from './lib/commons.mjs';
 
 const SIMULAR = process.argv.includes('--simular');
@@ -21,8 +21,11 @@ const site = await readJson(p('config/site.json'));
 const fuentes = await readJson(p('config/fuentes.json'));
 const noticias = await readJson(p('data/news.json'), []);
 const procesadas = await readJson(p('data/procesadas.json'), { links: [], titulos: [] });
+procesadas.fallidas ||= {}; // link -> intentos fallidos (se reintenta hasta 3 veces en corridas siguientes)
 const imagenes = await readJson(p('data/imagenes.json'));
 const cfg = site.ia || {};
+const INICIO = Date.now();
+const LIMITE_MS = (cfg.minutosMaximos || 15) * 60_000; // después de esto se guarda lo hecho y se termina
 
 // ---------- 1. Leer medios ----------
 log('Leyendo medios…');
@@ -49,7 +52,7 @@ const titulosPublicados = noticias.slice(0, 200).map((n) => n.titulo).concat(pro
 const candidatos = [];
 for (const it of items.sort((a, b) => (b.fecha || '').localeCompare(a.fecha || ''))) {
   if (it.fecha && Date.parse(it.fecha) < limite) continue;
-  if (vistosLinks.has(it.link)) continue;
+  if (vistosLinks.has(it.link) && !(procesadas.fallidas[it.link] < 3)) continue;
   if (titulosPublicados.some((t) => titleSimilarity(t, it.titulo) > 0.55)) continue;
   if (candidatos.some((c) => c.link === it.link || titleSimilarity(c.titulo, it.titulo) > 0.7)) continue;
   candidatos.push(it);
@@ -73,6 +76,9 @@ if (!candidatos.length) {
 }
 
 // ---------- 3. Gemini elige lo relevante ----------
+const MODELOS = await modelosDisponibles({ preferidos: cfg.modelos || [] });
+log(`Modelos de Gemini disponibles: ${MODELOS.join(', ')}`);
+let buscarActivo = cfg.usarBusquedaGoogle !== false;
 const SISTEMA_EDITOR = `Sos el editor de "${site.nombre}", un medio de noticias de viajes para personas que viven en Uruguay y viajan como turistas: salen por el Aeropuerto de Carrasco, por Buquebus o en ómnibus, y sus destinos más comunes son Argentina, Brasil, Chile, el Caribe, Estados Unidos y Europa. Priorizás lo que cambia la decisión o la experiencia de ese viajero.`;
 
 const listado = candidatos
@@ -116,15 +122,39 @@ const schemaSeleccion = {
 };
 
 log('Gemini elige las noticias relevantes…');
-const sel = await gemini({ prompt: promptSeleccion, sistema: SISTEMA_EDITOR, schema: schemaSeleccion, temperatura: 0.2, modelos: cfg.modelos });
+let sel;
+try {
+  sel = await gemini({ prompt: promptSeleccion, sistema: SISTEMA_EDITOR, schema: schemaSeleccion, temperatura: 0.2, modelos: MODELOS });
+} catch (err) {
+  log(`⚠ No se pudo elegir noticias: ${err.message}. Se reintenta en la próxima corrida; el sitio se publica igual.`);
+  process.exit(0);
+}
 const elegidas = (sel.json?.seleccion || [])
   .filter((s) => s.puntaje >= (cfg.puntajeMinimo || 7))
   .sort((a, b) => b.puntaje - a.puntaje)
   .slice(0, cfg.maxNoticiasPorEjecucion || 4);
 log(`  ${elegidas.length} historias elegidas (modelo ${sel.modelo}).`);
 
-// Todo lo evaluado se marca como procesado para no volver a pagarlo en la próxima corrida.
-for (const c of candidatos) procesadas.links.push(c.link);
+// Lo que Gemini descartó se marca como procesado para no volver a evaluarlo.
+// Las elegidas se marcan recién cuando se publican (o después de 3 intentos fallidos).
+const idsElegidos = new Set(elegidas.flatMap((s) => s.ids));
+for (const c of candidatos) if (!idsElegidos.has(c.id) && !procesadas.links.includes(c.link)) procesadas.links.push(c.link);
+
+async function guardar() {
+  procesadas.links = procesadas.links.slice(-4000);
+  procesadas.titulos = procesadas.titulos.slice(-1000);
+  const todas = [...nuevas, ...noticias].sort((a, b) => b.fecha.localeCompare(a.fecha)).slice(0, 2000);
+  await writeJson(p('data/news.json'), todas);
+  await writeJson(p('data/procesadas.json'), procesadas);
+  await writeJson(p('data/imagenes.json'), imagenes);
+  return todas.length;
+}
+function marcarFallida(grupo) {
+  for (const c of grupo) {
+    procesadas.fallidas[c.link] = (procesadas.fallidas[c.link] || 0) + 1;
+    if (procesadas.fallidas[c.link] >= 3) procesadas.links.push(c.link);
+  }
+}
 
 // ---------- 4. Redactar cada nota ----------
 const clavesImagen = imagenes.lista.map((i) => `${i.clave} (${i.descripcion})`).join('; ');
@@ -154,7 +184,7 @@ function promptRedaccion(grupo, textos) {
     .map((c, i) => `FUENTE ${i + 1}: ${c.medio || 'medio'} (${c.fecha?.slice(0, 10) || 's/f'})\nTítulo: ${c.titulo}\nResumen: ${c.resumen || '-'}\n${textos[i] ? 'Texto:\n' + textos[i] : ''}`)
     .join('\n\n');
   return `Fecha de hoy: ${new Date().toISOString().slice(0, 10)}.
-Escribí una nota para el sitio sobre esta historia. ${cfg.usarBusquedaGoogle !== false ? 'Buscá en Google para confirmar y completar los datos clave (fechas, frecuencias, precios, requisitos oficiales).' : ''}
+Escribí una nota para el sitio sobre esta historia. ${buscarActivo ? 'Buscá en Google para confirmar y completar los datos clave (fechas, frecuencias, precios, requisitos oficiales).' : ''}
 
 ${fuentesTxt}
 
@@ -179,24 +209,34 @@ const nuevas = [];
 for (const s of elegidas) {
   const grupo = s.ids.map((id) => candidatos.find((c) => c.id === id)).filter(Boolean).slice(0, 4);
   if (!grupo.length) continue;
+  if (Date.now() - INICIO > LIMITE_MS) {
+    log(`Se alcanzó el tiempo máximo (${cfg.minutosMaximos || 15} min). Lo que falta queda para la próxima corrida.`);
+    break;
+  }
   log(`Redactando: ${s.tema} (${s.puntaje}/10)`);
   try {
     const textos = await Promise.all(grupo.map((c) => textoDelArticulo(c.link)));
     let r;
-    try {
-      r = await gemini({ prompt: promptRedaccion(grupo, textos), sistema: SISTEMA_REDACTOR, buscar: cfg.usarBusquedaGoogle !== false, temperatura: 0.5, modelos: cfg.modelos });
-    } catch (err) {
-      if (cfg.usarBusquedaGoogle === false) throw err;
-      log(`  la búsqueda falló (${err.message}); reintento sin búsqueda`);
-      r = await gemini({ prompt: promptRedaccion(grupo, textos), sistema: SISTEMA_REDACTOR, temperatura: 0.5, modelos: cfg.modelos });
+    if (buscarActivo) {
+      try {
+        r = await gemini({ prompt: promptRedaccion(grupo, textos), sistema: SISTEMA_REDACTOR, buscar: true, temperatura: 0.5, modelos: MODELOS });
+      } catch (err) {
+        if (!err.cupo) throw err;
+        buscarActivo = false; // no se vuelve a intentar en esta corrida
+        log(`  ${err.message}: sigo sin búsqueda, solo con el texto de los medios`);
+      }
     }
+    if (!r) r = await gemini({ prompt: promptRedaccion(grupo, textos), sistema: SISTEMA_REDACTOR, temperatura: 0.5, modelos: MODELOS });
     const n = r.json;
     if (!n || n.es_relevante === false || !n.titulo || !n.cuerpo) {
-      log('  descartada por el redactor');
+      log(n ? '  descartada por el redactor' : '  la respuesta no era un JSON válido');
+      if (n) for (const c of grupo) procesadas.links.push(c.link);
+      else marcarFallida(grupo);
       continue;
     }
     if ([...noticias, ...nuevas].some((x) => titleSimilarity(x.titulo, n.titulo) > 0.6)) {
       log('  descartada: ya existe una nota parecida');
+      for (const c of grupo) procesadas.links.push(c.link);
       continue;
     }
 
@@ -238,17 +278,23 @@ for (const s of elegidas) {
       modelo: r.modelo,
     });
     procesadas.titulos.push(n.titulo);
+    for (const c of grupo) {
+      procesadas.links.push(c.link);
+      delete procesadas.fallidas[c.link];
+    }
+    await guardar(); // se guarda nota por nota: si algo corta la corrida, lo publicado no se pierde
     log(`  ✓ ${n.titulo}`);
   } catch (err) {
-    log(`  ✗ error: ${err.message}`);
+    marcarFallida(grupo);
+    log(`  ✗ no se pudo redactar: ${err.message}. Se reintenta en la próxima corrida.`);
+    if (err.cupo && !err.conBusqueda) {
+      log('  El cupo de Gemini está agotado: corto acá para no gastar más tiempo.');
+      break;
+    }
   }
 }
 
 // ---------- 5. Guardar ----------
-const todas = [...nuevas, ...noticias].sort((a, b) => b.fecha.localeCompare(a.fecha)).slice(0, 2000);
-procesadas.links = procesadas.links.slice(-4000);
-procesadas.titulos = procesadas.titulos.slice(-1000);
-await writeJson(p('data/news.json'), todas);
-await writeJson(p('data/procesadas.json'), procesadas);
-await writeJson(p('data/imagenes.json'), imagenes);
-log(`Listo: ${nuevas.length} noticias nuevas publicadas. Total: ${todas.length}.`);
+for (const [link, n] of Object.entries(procesadas.fallidas)) if (n >= 3) delete procesadas.fallidas[link];
+const total = await guardar();
+log(`Listo: ${nuevas.length} noticias nuevas publicadas en ${Math.round((Date.now() - INICIO) / 60000)} min. Total: ${total}.`)
