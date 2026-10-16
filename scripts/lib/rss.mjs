@@ -45,11 +45,11 @@ export function parseFeed(xml, medioPorDefecto = '') {
   return items;
 }
 
-export function googleNewsUrl({ q, region = 'UY', idioma = 'es' }) {
+export function googleNewsUrl({ q, region = 'UY', idioma = 'es' }, dias = 8) {
   const hl = idioma === 'en' ? 'en-US' : 'es-419';
   const gl = region;
   const ceid = `${gl}:${idioma === 'en' ? 'en' : 'es-419'}`;
-  return `https://news.google.com/rss/search?q=${encodeURIComponent(q + ' when:3d')}&hl=${hl}&gl=${gl}&ceid=${ceid}`;
+  return `https://news.google.com/rss/search?q=${encodeURIComponent(`${q} when:${dias}d`)}&hl=${hl}&gl=${gl}&ceid=${ceid}`;
 }
 
 export async function leerFeed(url, medio) {

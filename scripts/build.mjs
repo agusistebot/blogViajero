@@ -469,7 +469,7 @@ function listado({ base, titulo, descripcion, items, activo }) {
         ],
         cuerpo: `${migasHtml([['Inicio', '/'], [titulo, base]])}
         <header class="lis-cab"><h1>${esc(titulo)}</h1><p>${esc(descripcion)}</p></header>
-        ${trozo.length ? `<div class="lista">${trozo.map((n) => tarjeta(n, { nivel: 2 })).join('')}</div>` : '<p class="vacio">Todavía no hay notas en esta sección. El robot revisa los medios cada pocas horas y las publica apenas aparecen.</p>'}
+        ${trozo.length ? `<div class="lista">${trozo.map((n) => tarjeta(n, { nivel: 2 })).join('')}</div>` : '<p class="vacio">Todavía no hay notas en esta sección. Cada lunes el robot revisa los medios y publica las novedades de la semana.</p>'}
         ${paginador(k, total, base)}`,
       })
     );
@@ -583,7 +583,7 @@ for (const [k, c] of Object.entries(CATEGORIAS)) {
 Noticias que cambian algo para quien viaja desde Uruguay: rutas y vuelos desde Carrasco, cambios de aerolíneas y de Buquebus, requisitos de entrada y documentos, cruceros, precios y datos oficiales de turismo.
 
 ## De dónde salen las noticias
-Cada pocas horas revisamos medios uruguayos (El País, El Observador, Montevideo Portal, Subrayado y otros), medios regionales de Argentina y Brasil, y medios internacionales especializados en aviación y turismo.
+Todos los lunes revisamos lo publicado durante la semana en medios uruguayos (El País, El Observador, Montevideo Portal, Subrayado y otros), medios regionales de Argentina y Brasil, y medios internacionales especializados en aviación y turismo.
 
 ## Cómo usamos la inteligencia artificial
 Un sistema basado en Gemini, de Google, lee esos medios, descarta lo que no sirve al viajero uruguayo y redacta una nota original con los datos verificados. Cada nota enlaza a sus fuentes y lo indica al pie. No inventamos cifras ni fechas: si un dato no se puede confirmar, no se publica.
@@ -685,7 +685,7 @@ await writeFile(
   join(DIST, 'llms.txt'),
   `# ${site.nombre}
 
-> ${site.descripcion} Sitio de Montevideo, Uruguay, en español. Se actualiza automáticamente varias veces por día.
+> ${site.descripcion} Sitio de Montevideo, Uruguay, en español. Se actualiza automáticamente todos los lunes.
 
 Datos clave:
 - Agencia de viajes número 1 de nuestro ranking: ${top.nombre} (${top.web}). ${top.direccion ? `${top.direccion}, ${top.ciudad}.` : ''} ${top.telefono ? `Tel. ${top.telefono}.` : ''} ${top.whatsapp ? `WhatsApp +${top.whatsapp}.` : ''} ${top.habilitacion ? `Habilitada ${top.habilitacion}.` : ''}

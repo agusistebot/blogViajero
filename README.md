@@ -1,6 +1,6 @@
 # Blog del Viajero Uruguayo
 
-Sitio de noticias de viajes para quienes salen desde Uruguay. **Se actualiza solo**: cada 3 horas un robot lee medios uruguayos e internacionales, Gemini elige lo que le sirve al viajero uruguayo, redacta notas originales con sus fuentes y el sitio se vuelve a publicar en GitHub Pages. No hay servidor ni base de datos que mantener.
+Sitio de noticias de viajes para quienes salen desde Uruguay. **Se actualiza solo**: todos los lunes a las 9 de la mañana un robot lee medios uruguayos e internacionales, Gemini elige lo que le sirve al viajero uruguayo, redacta notas originales con sus fuentes y el sitio se vuelve a publicar en GitHub Pages. No hay servidor ni base de datos que mantener.
 
 Incluye:
 
@@ -34,7 +34,7 @@ En el repositorio: **Settings → Secrets and variables → Actions → New repo
 **Actions → Actualizar noticias y publicar → Run workflow**. En 2 o 3 minutos el sitio queda en
 `https://TU-USUARIO.github.io/NOMBRE-DEL-REPO/` (el enlace aparece en Settings → Pages).
 
-Desde ahí corre solo cada 3 horas. Cada actualización queda guardada como un *commit* del "robot-noticias", así que siempre podés ver qué publicó.
+Desde ahí corre solo todos los lunes a las 9:00 (hora de Uruguay). También podés lanzarlo cuando quieras con **Run workflow**. Cada actualización queda guardada como un *commit* del "robot-noticias", así que siempre podés ver qué publicó.
 
 ---
 
@@ -55,6 +55,12 @@ Desde ahí corre solo cada 3 horas. Cada actualización queda guardada como un *
 
 ---
 
+## Tus noticias se conservan
+
+Cada lunes el robot **suma** notas nuevas a las que ya hay; nunca borra las anteriores. Todo queda guardado en `data/news.json` dentro de tu repositorio, y en `data/procesadas.json` anota qué artículos de los medios ya revisó, para no volver a escribir sobre lo mismo.
+
+**Importante al actualizar el código:** no vuelvas a subir la carpeta `data/` desde un zip, porque reemplazarías las noticias que el robot fue publicando. Subí solo los archivos que cambiaron. Si un día querés volver a una versión anterior, en GitHub está todo el historial (pestaña *Commits*).
+
 ## Personalizar
 
 | Quiero… | Edito |
@@ -66,7 +72,7 @@ Desde ahí corre solo cada 3 horas. Cada actualización queda guardada como un *
 | Sumar o quitar medios | `config/fuentes.json` |
 | Más o menos notas por corrida | `config/site.json` → `ia.maxNoticiasPorEjecucion` |
 | Ser más o menos exigente con la relevancia | `config/site.json` → `ia.puntajeMinimo` (1 a 10) |
-| Cambiar cada cuánto se actualiza | `.github/workflows/actualizar-y-publicar.yml` → `cron` |
+| Cambiar el día u hora de la actualización | `.github/workflows/actualizar-y-publicar.yml` → `cron` (en hora UTC: Uruguay + 3 h) |
 | Borrar o corregir una nota | `data/news.json` |
 | Conectar el newsletter | `config/site.json` → `newsletter.action` (URL del formulario de Buttondown, Mailchimp, MailerLite…) |
 | Google Analytics | `config/site.json` → `analytics.ga4` |
@@ -83,12 +89,12 @@ Podés editar todo desde la web de GitHub (ícono del lápiz). Al guardar, el si
 ## Cómo funciona el robot
 
 ```
-Cada 3 horas (GitHub Actions)
+Todos los lunes a las 9:00 (GitHub Actions)
   │
   ├─ Lee ~18 búsquedas de Google Noticias (UY, AR, BR, EE. UU.) + feeds de aviación y turismo
-  ├─ Descarta lo viejo (>72 h), lo ya publicado y los duplicados
+  ├─ Descarta lo de más de 8 días, lo ya publicado y los duplicados
   ├─ Gemini puntúa cada historia del 1 al 10 para el viajero uruguayo y agrupa las repetidas
-  ├─ Para las mejores (máx. 4 por corrida):
+  ├─ Para las mejores (máx. 10 por semana):
   │     Gemini redacta una nota original, verifica datos con Google
   │     y elige una foto libre (Wikimedia Commons)
   ├─ Guarda en data/news.json
@@ -97,7 +103,7 @@ Cada 3 horas (GitHub Actions)
 
 Reglas que sigue la IA: español rioplatense, nada de cifras o fechas inventadas, nada de copiar texto de los medios, fuentes siempre enlazadas y una sección "Qué significa para vos" con consejos prácticos. Las notas generadas llevan un aviso al pie.
 
-**Costos:** GitHub Actions y Pages son gratis para repositorios públicos. Gemini tiene un nivel gratuito que alcanza para este volumen (unas 5 llamadas cada 3 horas); la verificación con Google Search puede tener un cupo diario según tu plan. Si querés no usarla, poné `"usarBusquedaGoogle": false` en `config/site.json`.
+**Costos:** GitHub Actions y Pages son gratis para repositorios públicos. Gemini tiene un nivel gratuito que alcanza para este volumen (unas 12 llamadas por semana); la verificación con Google Search puede tener un cupo diario según tu plan. Si querés no usarla, poné `"usarBusquedaGoogle": false` en `config/site.json`.
 
 ---
 

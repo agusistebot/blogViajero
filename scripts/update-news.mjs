@@ -30,7 +30,7 @@ const LIMITE_MS = (cfg.minutosMaximos || 15) * 60_000; // después de esto se gu
 // ---------- 1. Leer medios ----------
 log('Leyendo medios…');
 const tareas = [
-  ...fuentes.google_news.map((g) => ({ url: googleNewsUrl(g), medio: '', etiqueta: `Google Noticias: ${g.q}` })),
+  ...fuentes.google_news.map((g) => ({ url: googleNewsUrl(g, Math.ceil((cfg.horasHaciaAtras || 192) / 24)), medio: '', etiqueta: `Google Noticias: ${g.q}` })),
   ...fuentes.rss.map((r) => ({ url: r.url, medio: r.nombre, etiqueta: r.nombre })),
 ];
 const resultados = await Promise.allSettled(tareas.map((t) => leerFeed(t.url, t.medio)));
@@ -45,7 +45,7 @@ resultados.forEach((r, i) => {
 });
 
 // ---------- 2. Filtrar: recientes, no vistas, sin duplicados ----------
-const limite = Date.now() - (cfg.horasHaciaAtras || 72) * 3600e3;
+const limite = Date.now() - (cfg.horasHaciaAtras || 192) * 3600e3;
 const vistosLinks = new Set(procesadas.links);
 const titulosPublicados = noticias.slice(0, 200).map((n) => n.titulo).concat(procesadas.titulos.slice(-400));
 

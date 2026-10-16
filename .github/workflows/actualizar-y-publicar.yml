@@ -1,9 +1,10 @@
 name: Actualizar noticias y publicar
 
 on:
-  # Cada 3 horas (en UTC). Cambiá el cron si querés más o menos frecuencia.
+  # Todos los lunes a las 8:50 de Uruguay (11:50 UTC), para que el sitio esté publicado a las 9:00.
+  # GitHub usa hora UTC; Uruguay es UTC-3 todo el año.
   schedule:
-    - cron: "17 */3 * * *"
+    - cron: "50 11 * * 1"
   # Botón "Run workflow" en la pestaña Actions
   workflow_dispatch:
   # Cuando editás algo a mano (por ejemplo el ranking de agencias)
@@ -22,7 +23,7 @@ concurrency:
 jobs:
   actualizar:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
 

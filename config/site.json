@@ -2,7 +2,7 @@
   "nombre": "Blog del Viajero Uruguayo",
   "nombreCorto": "Blog del Viajero",
   "eslogan": "Noticias de viajes, rankings de destinos y agencias, pensados para quienes salen desde Uruguay.",
-  "descripcion": "Noticias de vuelos, cruceros y turismo para viajeros uruguayos, actualizadas cada pocas horas. Ranking de destinos más elegidos y ranking de agencias de viaje del Uruguay.",
+  "descripcion": "Noticias de vuelos, cruceros y turismo para viajeros uruguayos, con una edición nueva cada lunes. Ranking de destinos más elegidos y ranking de agencias de viaje del Uruguay.",
   "url": "https://TU-USUARIO.github.io/blog-del-viajero",
   "idioma": "es-UY",
   "zonaHoraria": "America/Montevideo",
@@ -28,11 +28,11 @@
   "ia": {
     "_ayuda": "Configuración del robot. GEMINI_API_KEY va como 'secret' en GitHub, nunca acá. 'modelos' vacío = el robot elige solo los modelos Flash más nuevos disponibles para tu clave (recomendado).",
     "modelos": [],
-    "maxNoticiasPorEjecucion": 4,
+    "maxNoticiasPorEjecucion": 10,
     "puntajeMinimo": 7,
-    "horasHaciaAtras": 72,
-    "maxCandidatos": 80,
+    "horasHaciaAtras": 192,
+    "maxCandidatos": 150,
     "usarBusquedaGoogle": true,
-    "minutosMaximos": 15
+    "minutosMaximos": 25
   }
 }
