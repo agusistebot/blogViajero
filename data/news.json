@@ -1,5 +1,108 @@
 [
   {
+    "id": "2026-10-19-europa-etias-sigue-sin-fecha-de-inicio-y",
+    "slug": "europa-etias-sigue-sin-fecha-de-inicio-y-alertan-por-mas-de-150-paginas-truchas",
+    "titulo": "Europa: ETIAS sigue sin fecha de inicio y alertan por más de 150 páginas truchas",
+    "bajada": "El permiso ETIAS continúa postergado y sin fecha fijada. Alertan a los viajeros por decenas de sitios web falsos que cobran por el trámite.",
+    "categoria": "requisitos",
+    "etiquetas": [
+      "Europa",
+      "Espacio Schengen",
+      "ETIAS",
+      "Requisitos",
+      "Seguridad"
+    ],
+    "destino": "Europa",
+    "fecha": "2026-10-19T12:06:03.718Z",
+    "puntosClave": [
+      "La Unión Europea sigue sin fijar una fecha oficial y definitiva para la entrada en vigencia del sistema ETIAS tras reiteradas postergaciones.",
+      "Autoridades del sector turístico advirtieron que detectaron más de 150 páginas web no oficiales y falsas que prometen gestionar el permiso.",
+      "El trámite oficial no está activo para el público, por lo que ningún sitio web puede emitir autorizaciones en este momento.",
+      "Los ciudadanos uruguayos continúan viajando a los países del espacio Schengen únicamente con su pasaporte vigente."
+    ],
+    "cuerpo": "Si tenés planeado viajar al Viejo Continente en los próximos meses, prestá mucha atención: la implementación del permiso **ETIAS** (Sistema Europeo de Información y Autorización de Viajes) sigue sin una fecha confirmada de lanzamiento y, a la par, proliferan los intentos de engaño en internet.\n\nDurante los últimos años, la Unión Europea fue reprogramando el calendario de este sistema, pensado originalmente para registrar y autorizar previamente a los turistas de países que no precisan visa para ingresar al espacio Schengen, entre ellos Uruguay. La novedad en estos días de **octubre de 2026** es que el sistema continúa demorado y todavía no cuenta con un día de puesta en marcha confirmado.\n\nEl problema mayor es que la confusión alimenta las estafas. Organismos de la industria turística encendieron las alarmas tras detectar **más de 150 sitios web falsos y de intermediarios engañosos**. Estas plataformas intentan imitar los canales institucionales de la Unión Europea y ofrecen gestionar el trámite a cambio de pagos inflados o, directamente, para robar datos de tarjetas de crédito e información personal de los pasajeros.\n\nLa realidad es contundente: el sistema oficial todavía **no está habilitado** ni recibe solicitudes. Cuando se anuncie su funcionamiento definitivo, el único canal válido será el portal oficial de la Unión Europea (con dominio terminado en europa.eu).\n\n## Qué significa para vos\n\n- **No pagues nada por adelantado:** Si ves una página web, anuncio en redes o agencia que te pida plata para tramitar el ETIAS \"antes de viajar\", salí de ahí inmediatamente. Nadie puede emitir este documento hoy.\n- **Viajá como siempre:** Para ingresar como turista a España, Italia, Francia u otros países del espacio Schengen, los uruguayos solo necesitan el pasaporte vigente (con al menos tres meses de validez tras la fecha prevista de salida de Europa) y cumplir con los requisitos clásicos: pasaje de vuelta, reservas o carta de invitación, seguro médico y justificación económica.\n- **Informate por vías oficiales:** Cuando ETIAS esté listo, las autoridades europeas lanzarán una campaña con aviso previo. No pongas tus datos en buscadores que te redirijan a webs con extensiones comerciales dudosas.",
+    "faq": [
+      {
+        "pregunta": "¿Cuándo entra en vigencia el ETIAS para viajar a Europa?",
+        "respuesta": "Por el momento no hay una fecha confirmada de lanzamiento oficial tras sucesivas demoras en su implementación técnica."
+      },
+      {
+        "pregunta": "¿Los uruguayos necesitan tramitar el ETIAS hoy?",
+        "respuesta": "No, en la actualidad el sistema no está operativo y los uruguayos solo necesitan su pasaporte vigente para viajar a Europa por turismo hasta por 90 días."
+      },
+      {
+        "pregunta": "¿Cómo evitar estafas con páginas falsas de ETIAS?",
+        "respuesta": "No completes formularios ni pagues en sitios no oficiales; cuando el sistema entre en marcha, se gestionará exclusivamente en la web oficial de la Unión Europea (.europa.eu)."
+      }
+    ],
+    "imagen": {
+      "clave": "madrid"
+    },
+    "fuentes": [
+      {
+        "nombre": "SchengenVisaInfo",
+        "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPTDBzRHh5aF9yUGlVWC1BcmJHdUpJMVI4SGVYWXdPT1d0Q0NQSlphcnJqQ1o0TmoxVjBCaUlvZEVGY0dJaEE3azg1TEFuOFRoenZFUThZVy0wR25SV0VOZENubmFZaGtfNnlRLXk3VUJ5TTJ1V2FTTHc0S3hZcXh6V09XOXFRSUdD?oc=5"
+      },
+      {
+        "nombre": "TravelPulse",
+        "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNa1dHQ1ZiR1BJcmdnTUI2VnVXQW40bmUwTThIcHA2aFB6OFY1Vm1la2ctS1VUVDUtOHU4LTl3SVh3Z2ZuWXl6NGZnckRLMlViTWdxM1hJVms0MW4yQWZXNTgwNkREcFNGaXBxUW9keE1qUVdUU2pwRHVBWWlteGxXenJzTmxTTW9mREZlaFVIa2JDdHhjYXpFb0gyemNqT3FoU29xME5OQQ?oc=5"
+      },
+      {
+        "nombre": "connexionfrance",
+        "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPSFlkWVgzTWRVcml4ZjVRdU1BMnRxbk1DOG1TLWVhZEFSalpNSFZtOFpzdjBfd3FrZXN3bGR5d0taVEltMmdwaU94Si1MM3YwN3pTMG04Y19ibXc0UzNKXzdMblZjdDRDUk5sdUIyRkFJT29iNDZ0M1NHb2dQUGpla0JFdkttb2luaTJMVl9YNzdTcVJaRzVXUXNueVd0a1p1Z09uVDczOThqc3ZGbjFZNVhHcVc?oc=5"
+      },
+      {
+        "nombre": "Travelweek",
+        "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNM2prRWE4ZU5RMTNqYXFValZMN2VlY2lDcFR3c3J6cmpqZnJFc2JVeDQ2a3N2RXVQNmh3aURWd2JfRHJOckpOVW1HTFJKUHBnR3VGSC14am9KbUx6YVd6c0UyVlJLUlduSkNsNjRmcTZwLURsbEt4YTZmUnFOalZXUFB6dGd4MFF1U19WblQ2c0ZSSDY4eVQ0WERhVmxUMVc0MEc4THZB?oc=5"
+      }
+    ],
+    "origen": "ia",
+    "modelo": "gemini-flash-latest"
+  },
+  {
+    "id": "2026-10-19-avianca-suma-vuelos-diarios-entre-montev",
+    "slug": "avianca-suma-vuelos-diarios-entre-montevideo-y-bogota-mas-conexiones-desde-carra",
+    "titulo": "Avianca suma vuelos diarios entre Montevideo y Bogotá: más conexiones desde Carrasco",
+    "bajada": "Avianca incrementa sus frecuencias entre Montevideo y Bogotá a un vuelo diario, facilitando las conexiones con el Caribe y Norteamérica desde Carrasco.",
+    "categoria": "vuelos",
+    "etiquetas": [
+      "Avianca",
+      "Montevideo",
+      "Bogotá",
+      "vuelos",
+      "Colombia"
+    ],
+    "destino": "Bogotá",
+    "fecha": "2026-10-19T12:04:19.589Z",
+    "puntosClave": [
+      "Avianca amplía su operación en Uruguay y pasa a ofrecer un vuelo diario directo entre Montevideo y Bogotá.",
+      "La frecuencia diaria mejora las opciones de conexión desde el Aeropuerto de Carrasco hacia el Caribe, Centroamérica y Norteamérica.",
+      "Los uruguayos no requieren visa para ingresar a Colombia por turismo, pero deben completar el registro digital Check-Mig antes de viajar."
+    ],
+    "cuerpo": "La aerolínea Avianca anunció un incremento en sus operaciones en Uruguay y pasará a operar **vuelos diarios directos entre Montevideo y Bogotá**. Esta ampliación de frecuencias refuerza la conectividad del Aeropuerto Internacional de Carrasco con uno de los centros de conexiones más importantes de América Latina.\n\nHasta ahora, la compañía operaba la ruta con menos frecuencias semanales. Con la incorporación de vuelos todos los días, los pasajeros que salen desde Uruguay tendrán mayor flexibilidad para organizar sus viajes, tanto para volar a Colombia como para realizar conexiones hacia otros destinos internacionales.\n\nEl Aeropuerto Internacional El Dorado de Bogotá funciona como el principal hub de Avianca, desde donde es posible conectar hacia diversos puntos del Caribe (como Cartagena, San Andrés, Punta Cana o Aruba), Estados Unidos, Centroamérica y Europa. La mayor oferta de asientos y la frecuencia diaria permiten reducir tiempos de espera en las escalas y acceder a una gama más amplia de itinerarios.\n\nLos pasajes ya se encuentran disponibles a través de la página oficial de la aerolínea y agencias de viajes. Para viajar a Colombia como turista por menos de 90 días, los ciudadanos uruguayos no precisan visa, aunque deben completar el formulario migratorio obligatorio Check-Mig antes de embarcar.\n\n## Qué significa para vos\n\n- **Más flexibilidad de fechas:** Al haber vuelos todos los días, podés armar tus vacaciones o viajes de trabajo sin tener que adaptar tu itinerario a los días específicos en que volaba la aerolínea.\n- **Mejores conexiones al Caribe y Estados Unidos:** Bogotá es una alternativa clave para volar a destinos del Caribe y Norteamérica evitando escalas en Buenos Aires o San Pablo.\n- **Trámites antes de volar:** Recordá que, aunque no necesitás visa para Colombia, tenés que completar el formulario Check-Mig en línea entre 72 horas y 1 hora antes de la salida de tu vuelo.",
+    "faq": [
+      {
+        "pregunta": "¿Cuántos vuelos hay entre Montevideo y Bogotá con Avianca?",
+        "respuesta": "Avianca opera un vuelo diario directo entre el Aeropuerto Internacional de Carrasco y el Aeropuerto El Dorado en Bogotá."
+      },
+      {
+        "pregunta": "¿Qué requisitos se necesitan para viajar de Uruguay a Colombia?",
+        "respuesta": "Los ciudadanos uruguayos necesitan pasaporte vigente y completar el formulario migratorio online Check-Mig antes de embarcar; no se exige visa para turismo."
+      }
+    ],
+    "imagen": {
+      "clave": "carrasco"
+    },
+    "fuentes": [
+      {
+        "nombre": "EL PAÍS Uruguay",
+        "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxOc1hIMFhVazc4OUlWMVJNYlZBZ0JXUzN4QVg4VVpqUldrclFyQXI0dmNtOER1WERDWjE3eVBFVnRpQnloc2YtUGZFOTFxbU5jMVNYTW5wOHVFdWgybGp0dS02OXBROEcwRW9NbFZvMThHRUlpSUNoMEVJem1yODRRRnhoM2tFd1BGQ1RELUF0bm1jZTZIcVYzdVBlSGZQUldfWjEzMW5RX0dHMW1XaXRCUEhFbnJNZGRyV09zY0tjcFhEaHc?oc=5"
+      }
+    ],
+    "origen": "ia",
+    "modelo": "gemini-3.6-flash"
+  },
+  {
     "id": "2026-10-16-clausuran-la-agencia-de-viajes-magna-gro",
     "slug": "clausuran-la-agencia-de-viajes-magna-group-tras-denuncias-de-estafa-que-tener-en",
     "titulo": "Clausuran la agencia de viajes Magna Group tras denuncias de estafa: qué tener en cuenta",
