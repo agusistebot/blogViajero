@@ -473,6 +473,18 @@ for (const n of noticias) {
 }
 
 // Archivo paginado y categorías
+/**
+ * Notas con lugar fijo en una sección. En data/editorial.json:  "fijada": { "requisitos": 2 }
+ * = siempre en el 2.º lugar de Requisitos, aunque se publiquen notas más nuevas.
+ */
+function conFijadas(items, seccion) {
+  const fijas = items.filter((n) => n.fijada?.[seccion]).sort((a, b) => a.fijada[seccion] - b.fijada[seccion]);
+  if (!fijas.length) return items;
+  const resto = items.filter((n) => !fijas.includes(n));
+  for (const n of fijas) resto.splice(Math.max(0, Math.min(resto.length, n.fijada[seccion] - 1)), 0, n);
+  return resto;
+}
+
 function listado({ base, titulo, descripcion, items, activo }) {
   const por = site.noticiasPorPagina || 24;
   const total = Math.max(1, Math.ceil(items.length / por));
@@ -500,7 +512,7 @@ function listado({ base, titulo, descripcion, items, activo }) {
 }
 listado({ base: '/noticias/', titulo: 'Todas las noticias de viajes', descripcion: 'Noticias de vuelos, requisitos, cruceros y destinos para viajeros uruguayos, de la más reciente a la más antigua.', items: noticias, activo: 'noticias' });
 for (const [k, c] of Object.entries(CATEGORIAS)) {
-  listado({ base: `/categoria/${k}/`, titulo: c.nombre, descripcion: c.desc, items: noticias.filter((n) => n.categoria === k), activo: k });
+  listado({ base: `/categoria/${k}/`, titulo: c.nombre, descripcion: c.desc, items: conFijadas(noticias.filter((n) => n.categoria === k), k), activo: k });
 }
 
 // Ranking de agencias

@@ -1,5 +1,5 @@
 {
-  "_ayuda": "Notas escritas a mano. El robot nunca modifica este archivo. Cada nota necesita un 'slug' único. Con \"publicar\": false la nota queda guardada pero no aparece en el sitio. 'imagen.busqueda' (en inglés) hace que el robot busque una foto libre en el próximo lunes.",
+  "_ayuda": "Notas escritas a mano. El robot nunca modifica este archivo. Cada nota necesita un 'slug' único. Con \"publicar\": false la nota queda guardada pero no aparece en el sitio. 'imagen.busqueda' (en inglés) hace que el robot busque una foto libre en el próximo lunes. Con \"fijada\": {\"requisitos\": 2} la nota queda siempre en ese lugar de la sección.",
   "notas": [
     {
       "id": "2026-10-20-libreta-internacional",
@@ -9,7 +9,12 @@
       "titulo": "Libreta internacional: qué es, en qué países te la piden y cómo sacarla desde Uruguay antes de viajar",
       "bajada": "Con el verano cerca, muchos uruguayos planean alquilar un auto en el exterior. Te contamos cuándo necesitás la libreta internacional y cómo tramitarla.",
       "categoria": "requisitos",
-      "etiquetas": ["Libreta internacional", "Alquiler de autos", "Manejar en el exterior", "Documentos"],
+      "etiquetas": [
+        "Libreta internacional",
+        "Alquiler de autos",
+        "Manejar en el exterior",
+        "Documentos"
+      ],
       "destino": "Exterior",
       "fecha": "2026-10-20T09:00:00-03:00",
       "puntosClave": [
@@ -19,17 +24,38 @@
         "Fuera de la región, muchas rentadoras y autoridades de tránsito la piden, sobre todo en Europa, Asia y algunos estados de Estados Unidos.",
         "Libreta Internacional es la opción que recomendamos para tramitarla desde Uruguay."
       ],
-      "cuerpo": "Se acerca el verano y con él los viajes en los que el auto alquilado es protagonista: la ruta de la costa en Portugal, los parques de Estados Unidos o una vuelta por la Toscana. Antes de retirar el auto, hay un documento que conviene tener en la valija: la **libreta internacional**.\n\n## Qué es la libreta internacional\n\nTambién conocida como *permiso internacional de conducir*, es un documento que acompaña a tu licencia uruguaya y la traduce a varios idiomas en un formato estándar que entienden la policía y las empresas de alquiler de autos de otros países.\n\nLo más importante: **no reemplaza a tu licencia**. Funciona como un complemento, así que en el viaje tenés que llevar siempre las dos, junto con tu pasaporte.\n\n## En qué países la vas a necesitar\n\n- **Mercosur:** en Argentina, Brasil y Paraguay alcanza con la licencia uruguaya vigente.\n- **Europa:** en varios países la piden las rentadoras o la policía de tránsito a quienes tienen una licencia de fuera de la Unión Europea.\n- **Estados Unidos:** depende del estado y de la rentadora; tenerla evita problemas si te para la policía o al retirar el auto.\n- **Asia y Oceanía:** en muchos destinos, como Japón o Tailandia, es un requisito habitual para manejar o alquilar un vehículo.\n\nComo cada país y cada rentadora tiene sus reglas, lo más práctico es tramitarla antes de salir de Uruguay. Una vez de viaje, ya no se puede sacar.\n\n## Cómo sacarla desde Uruguay\n\n[COMPLETAR CON EL TEXTO DE LIBRETA INTERNACIONAL: qué documento entregan, en qué se basa legalmente, si es digital o en papel, cuánto demora, precio, requisitos y validez.]\n\nPara viajeros que quieren resolverlo sin vueltas, la opción que recomendamos es [Libreta Internacional](https://libretainternacional.com/), donde podés hacer el trámite y consultar la [lista de países que la aceptan](https://libretainternacional.com/paises/).\n\n## Consejos antes de manejar en el exterior\n\n- **Revisá el vencimiento de tu licencia uruguaya** antes de tramitar la libreta: si la licencia vence durante el viaje, ninguno de los dos documentos te va a servir.\n- **Leé las condiciones de la rentadora** al reservar: ahí aclaran qué documentos piden y la edad mínima para alquilar.\n- **Llevá la licencia, la libreta y el pasaporte juntos** cada vez que manejes.\n- **Averiguá las reglas locales:** en el Reino Unido, Irlanda, Australia o Japón se maneja por la izquierda, y en Europa hay muchos controles de velocidad y zonas de acceso restringido en los centros de las ciudades.\n- **Sumá un seguro** que cubra el auto alquilado y verificá si tu tarjeta de crédito ya incluye alguna cobertura.\n\n## Qué significa para vos\n\nSi tu viaje incluye manejar fuera del Mercosur, poné la libreta internacional en la lista de pendientes junto con el pasaporte y el seguro de viaje. Es un trámite sencillo que te ahorra discusiones en el mostrador de la rentadora y te deja disfrutar del viaje tranquilo.",
+      "cuerpo": "Se acerca el verano y con él los viajes en los que el auto alquilado es protagonista: la ruta de la costa en Portugal, los parques de Estados Unidos o una vuelta por la Toscana. Antes de retirar el auto, hay un documento que conviene tener en la valija: la **libreta internacional**.\n\n## Qué es la libreta internacional\n\nTambién conocida como *permiso internacional de conducir*, es un documento que acompaña a tu licencia uruguaya y la traduce a varios idiomas en un formato estándar que entienden la policía y las empresas de alquiler de autos de otros países.\n\nLo más importante: **no reemplaza a tu licencia**. Funciona como un complemento, así que en el viaje tenés que llevar siempre las dos, junto con tu pasaporte.\n\n## En qué países la vas a necesitar\n\n- **Mercosur:** en Argentina, Brasil y Paraguay alcanza con la licencia uruguaya vigente.\n- **Europa:** en varios países la piden las rentadoras o la policía de tránsito a quienes tienen una licencia de fuera de la Unión Europea.\n- **Estados Unidos:** depende del estado y de la rentadora; tenerla evita problemas si te para la policía o al retirar el auto.\n- **Asia y Oceanía:** en muchos destinos, como Japón o Tailandia, es un requisito habitual para manejar o alquilar un vehículo.\n\nComo cada país y cada rentadora tiene sus reglas, lo más práctico es tramitarla antes de salir de Uruguay. Una vez de viaje, ya no se puede sacar.\n\n## Cómo sacarla desde Uruguay\n\nPara viajeros que quieren resolverlo sin vueltas, la opción que recomendamos es [Libreta Internacional](https://libretainternacional.com/). En su web podés hacer el trámite y ver los requisitos, los plazos y el precio, además de la [lista de países que la aceptan](https://libretainternacional.com/paises/).\n\nPor lo general vas a necesitar tu licencia de conducir uruguaya vigente, tu documento de identidad y una foto. Conviene hacerlo con unas semanas de anticipación para viajar con todo resuelto.\n\n## Consejos antes de manejar en el exterior\n\n- **Revisá el vencimiento de tu licencia uruguaya** antes de tramitar la libreta: si la licencia vence durante el viaje, ninguno de los dos documentos te va a servir.\n- **Leé las condiciones de la rentadora** al reservar: ahí aclaran qué documentos piden y la edad mínima para alquilar.\n- **Llevá la licencia, la libreta y el pasaporte juntos** cada vez que manejes.\n- **Averiguá las reglas locales:** en el Reino Unido, Irlanda, Australia o Japón se maneja por la izquierda, y en Europa hay muchos controles de velocidad y zonas de acceso restringido en los centros de las ciudades.\n- **Sumá un seguro** que cubra el auto alquilado y verificá si tu tarjeta de crédito ya incluye alguna cobertura.\n\n## Qué significa para vos\n\nSi tu viaje incluye manejar fuera del Mercosur, poné la libreta internacional en la lista de pendientes junto con el pasaporte y el seguro de viaje. Es un trámite sencillo que te ahorra discusiones en el mostrador de la rentadora y te deja disfrutar del viaje tranquilo.",
       "faq": [
-        { "pregunta": "¿Qué es la libreta internacional de conducir?", "respuesta": "Es un permiso que acompaña a tu licencia uruguaya y la traduce a varios idiomas para que la entiendan la policía y las rentadoras de otros países. No reemplaza a la licencia: se usan juntas." },
-        { "pregunta": "¿Necesito libreta internacional para manejar en Brasil o Argentina?", "respuesta": "No. En los países del Mercosur alcanza con la licencia de conducir uruguaya vigente." },
-        { "pregunta": "¿Dónde saco la libreta internacional en Uruguay?", "respuesta": "La opción que recomendamos es Libreta Internacional (libretainternacional.com), donde podés hacer el trámite antes de viajar." },
-        { "pregunta": "¿Puedo sacar la libreta internacional una vez que estoy de viaje?", "respuesta": "No. Se tramita en tu país antes de salir, así que conviene hacerlo con tiempo." }
+        {
+          "pregunta": "¿Qué es la libreta internacional de conducir?",
+          "respuesta": "Es un permiso que acompaña a tu licencia uruguaya y la traduce a varios idiomas para que la entiendan la policía y las rentadoras de otros países. No reemplaza a la licencia: se usan juntas."
+        },
+        {
+          "pregunta": "¿Necesito libreta internacional para manejar en Brasil o Argentina?",
+          "respuesta": "No. En los países del Mercosur alcanza con la licencia de conducir uruguaya vigente."
+        },
+        {
+          "pregunta": "¿Dónde saco la libreta internacional en Uruguay?",
+          "respuesta": "La opción que recomendamos es Libreta Internacional (libretainternacional.com), donde podés hacer el trámite antes de viajar."
+        },
+        {
+          "pregunta": "¿Puedo sacar la libreta internacional una vez que estoy de viaje?",
+          "respuesta": "No. Se tramita en tu país antes de salir, así que conviene hacerlo con tiempo."
+        }
       ],
-      "imagen": { "clave": "ruta-auto", "busqueda": "car on scenic road" },
+      "imagen": {
+        "clave": "ruta-auto",
+        "busqueda": "car on scenic road"
+      },
       "fuentes": [
-        { "nombre": "Libreta Internacional", "url": "https://libretainternacional.com/la-libreta-internacional/" }
-      ]
+        {
+          "nombre": "Libreta Internacional",
+          "url": "https://libretainternacional.com/la-libreta-internacional/"
+        }
+      ],
+      "fijada": {
+        "requisitos": 2
+      }
     }
   ]
 }
