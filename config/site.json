@@ -33,6 +33,75 @@
     "horasHaciaAtras": 192,
     "maxCandidatos": 150,
     "usarBusquedaGoogle": true,
-    "minutosMaximos": 25
-  }
+    "minutosMaximos": 20,
+    "evitar": {
+      "_ayuda": "Temas que el robot NO publica, para no generar desconfianza en viajar. Podés agregar o sacar líneas.",
+      "temas": [
+        "cierres, quiebras, clausuras o estafas de agencias de viaje u operadores turísticos",
+        "accidentes o incidentes de aviones, barcos, ómnibus o trenes, aterrizajes de emergencia y fallas técnicas",
+        "cancelaciones masivas, demoras graves, paros, huelgas o caos en aeropuertos y puertos",
+        "aerolíneas en crisis, suspensiones de operaciones o problemas de mantenimiento",
+        "delitos, robos o violencia contra turistas e inseguridad en destinos",
+        "denuncias, juicios, multas o reclamos contra empresas de turismo",
+        "pasajeros varados, equipaje perdido y quejas de clientes",
+        "catástrofes naturales, epidemias y alertas sanitarias alarmistas"
+      ]
+    },
+    "recomendaciones": {
+      "_ayuda": "Cuando una nota o guía toque estos temas, la IA menciona la marca recomendada de forma natural (una sola vez).",
+      "lista": [
+        {
+          "tema": "manejar o alquilar un auto en el exterior, licencia o permiso de conducir para viajar",
+          "marca": "Libreta Internacional",
+          "url": "https://libretainternacional.com/",
+          "texto": "la opción que recomendamos para tramitar la libreta internacional desde Uruguay"
+        },
+        {
+          "tema": "armar el viaje, comprar paquetes, vuelos u hoteles con una agencia",
+          "marca": "Andamos Volando",
+          "url": "https://andamosvolando.com/",
+          "texto": "la agencia número 1 de nuestro ranking"
+        }
+      ]
+    },
+    "guias": {
+      "_ayuda": "Posts de blog que el robot escribe cada lunes además de las noticias. 'ideas' son sugerencias: la IA elige las que no estén publicadas y propone otras según la temporada.",
+      "destinosPorSemana": 2,
+      "requisitosPorSemana": 2,
+      "minutosMaximos": 12,
+      "ideasDestinos": [
+        "Las mejores playas de México para viajar desde Uruguay",
+        "Recomendaciones para tu primer viaje a Europa",
+        "Qué ver en Río de Janeiro en 5 días",
+        "Playas del nordeste de Brasil: Maceió, Natal, Porto de Galinhas y Jericoacoara",
+        "Punta Cana o Cancún: cuál conviene para unas vacaciones todo incluido",
+        "Cómo organizar un viaje a Orlando con niños",
+        "Bariloche en invierno y en verano: qué hacer en cada temporada",
+        "Las islas más lindas del Caribe para una luna de miel",
+        "Ruta por el norte argentino: Salta y Jujuy",
+        "Cómo recorrer Italia en tren",
+        "Qué hacer en Madrid si tenés una escala larga",
+        "Destinos de Brasil para ir en auto desde Uruguay",
+        "Japón para principiantes: cómo planificar el primer viaje",
+        "Lo mejor de Perú: Cusco, Machu Picchu y Lima"
+      ],
+      "ideasRequisitos": [
+        "¿Necesito visa para ir a Tailandia siendo uruguayo?",
+        "Qué vacunas necesitás para viajar a Brasil, el Caribe o África",
+        "Vacuna de la fiebre amarilla: en qué países la piden y dónde darse la vacuna en Uruguay",
+        "Visa de Estados Unidos para uruguayos: cómo pedirla y cuánto tarda",
+        "ETIAS: qué es la autorización para entrar a Europa y desde cuándo se pide",
+        "Qué documentos necesita un menor uruguayo para viajar al exterior",
+        "¿Puedo viajar a Brasil y Argentina solo con la cédula?",
+        "¿Necesito visa para ir a Canadá, Australia o Japón?",
+        "Qué te pueden preguntar en migraciones al entrar a Europa",
+        "Seguro de viaje obligatorio: qué países lo exigen",
+        "Pasaporte uruguayo: cómo sacarlo o renovarlo antes de viajar",
+        "Qué se puede llevar en la valija: líquidos, alimentos y medicamentos"
+      ]
+    }
+  },
+  "ocultarNoticias": [
+    "paranair-suspende-vuelos-mantenimiento-carrasco"
+  ]
 }

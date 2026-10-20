@@ -55,6 +55,20 @@ Desde ahí corre solo todos los lunes a las 9:00 (hora de Uruguay). También pod
 
 ---
 
+## Qué publica cada lunes
+
+- **Noticias** de la semana, elegidas de los medios. El robot descarta las noticias negativas que generan desconfianza (cierres de agencias, accidentes, cancelaciones masivas, paros, delitos, etc.). La lista está en `config/site.json` → `ia.evitar.temas` y podés editarla.
+- **2 guías de destinos** ("Las mejores playas de México…", "Recomendaciones para tu primer viaje a Europa"). Salen en la sección *Guías de viaje*.
+- **2 guías de requisitos** ("¿Necesito visa para ir a Tailandia?", vacunas, ETIAS, menores…). Salen en *Requisitos y migraciones*. Por seguridad, **solo se publican si Gemini pudo verificarlas con la búsqueda de Google** en fuentes oficiales; si ese día no hay cupo de búsqueda, quedan para el lunes siguiente.
+- Las ideas de temas están en `config/site.json` → `ia.guias` (`ideasDestinos` e `ideasRequisitos`). La IA no repite temas ya publicados.
+- Cuando una nota trata de manejar en el exterior, menciona a **Libreta Internacional**; cuando trata de armar un viaje con agencia, a **Andamos Volando**. Se configura en `ia.recomendaciones`.
+
+## Notas escritas a mano
+
+`data/editorial.json` guarda notas propias, como la de la Libreta internacional. El robot nunca toca ese archivo. Con `"publicar": false` la nota queda guardada sin aparecer en el sitio; cambiala a `true` para publicarla.
+
+Para **ocultar** una noticia que ya salió, agregá su *slug* (la última parte de la dirección) en `config/site.json` → `ocultarNoticias`.
+
 ## Tus noticias se conservan
 
 Cada lunes el robot **suma** notas nuevas a las que ya hay; nunca borra las anteriores. Todo queda guardado en `data/news.json` dentro de tu repositorio, y en `data/procesadas.json` anota qué artículos de los medios ya revisó, para no volver a escribir sobre lo mismo.
@@ -91,7 +105,8 @@ Podés editar todo desde la web de GitHub (ícono del lápiz). Al guardar, el si
 ```
 Todos los lunes a las 9:00 (GitHub Actions)
   │
-  ├─ Lee ~18 búsquedas de Google Noticias (UY, AR, BR, EE. UU.) + feeds de aviación y turismo
+  ├─ Escribe 2 guías de requisitos (verificadas con Google) y 2 de destinos
+  ├─ Lee ~25 búsquedas de Google Noticias (UY, AR, BR, EE. UU.) + feeds de aviación y turismo
   ├─ Descarta lo de más de 8 días, lo ya publicado y los duplicados
   ├─ Gemini puntúa cada historia del 1 al 10 para el viajero uruguayo y agrupa las repetidas
   ├─ Para las mejores (máx. 10 por semana):

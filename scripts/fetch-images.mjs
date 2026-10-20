@@ -3,9 +3,24 @@
 import { existsSync } from 'node:fs';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { p, readJson, log, sleep } from './lib/util.mjs';
-import { commonsUrl } from './lib/commons.mjs';
+import { commonsUrl, buscarFotoLibre } from './lib/commons.mjs';
+import { writeJson } from './lib/util.mjs';
 
 const imagenes = await readJson(p('data/imagenes.json'));
+
+// Notas escritas a mano (data/editorial.json) pueden pedir una foto con "imagen": {"clave": "...", "busqueda": "palabras en inglés"}
+const editorial = (await readJson(p('data/editorial.json'), { notas: [] })).notas;
+let agregadas = 0;
+for (const n of editorial) {
+  const { clave, busqueda } = n.imagen || {};
+  if (!clave || !busqueda || imagenes.lista.some((i) => i.clave === clave)) continue;
+  const foto = await buscarFotoLibre(busqueda);
+  if (!foto) continue;
+  imagenes.lista.push({ clave, descripcion: busqueda, alt: n.imagen.alt || foto.alt, archivo: foto.archivo, autor: foto.autor, licencia: foto.licencia, temas: [], auto: true });
+  agregadas++;
+  log(`  + foto para "${n.titulo}": ${foto.archivo}`);
+}
+if (agregadas) await writeJson(p('data/imagenes.json'), imagenes);
 await mkdir(p('static/img'), { recursive: true });
 
 const EXT = { 'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp' };

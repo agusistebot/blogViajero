@@ -20,6 +20,7 @@ const CATEGORIAS = ['vuelos', 'cruceros', 'requisitos', 'destinos', 'ofertas', '
 const site = await readJson(p('config/site.json'));
 const fuentes = await readJson(p('config/fuentes.json'));
 const noticias = await readJson(p('data/news.json'), []);
+const editorial = (await readJson(p('data/editorial.json'), { notas: [] })).notas;
 const procesadas = await readJson(p('data/procesadas.json'), { links: [], titulos: [] });
 procesadas.fallidas ||= {}; // link -> intentos fallidos (se reintenta hasta 3 veces en corridas siguientes)
 const imagenes = await readJson(p('data/imagenes.json'));
@@ -47,7 +48,7 @@ resultados.forEach((r, i) => {
 // ---------- 2. Filtrar: recientes, no vistas, sin duplicados ----------
 const limite = Date.now() - (cfg.horasHaciaAtras || 192) * 3600e3;
 const vistosLinks = new Set(procesadas.links);
-const titulosPublicados = noticias.slice(0, 200).map((n) => n.titulo).concat(procesadas.titulos.slice(-400));
+const titulosPublicados = [...editorial, ...noticias].slice(0, 220).map((n) => n.titulo).concat(procesadas.titulos.slice(-400));
 
 const candidatos = [];
 for (const it of items.sort((a, b) => (b.fecha || '').localeCompare(a.fecha || ''))) {
@@ -88,9 +89,15 @@ const listado = candidatos
 const promptSeleccion = `Estas son notas recientes de medios uruguayos, regionales e internacionales.
 
 Puntuá de 1 a 10 qué tan útil es cada HISTORIA para un turista que viaja desde Uruguay.
-Puntúan alto (8-10): rutas y frecuencias nuevas o suspendidas desde/hacia Montevideo o Punta del Este; paros, cancelaciones o cambios de aerolíneas, Buquebus o aeropuertos que afecten a uruguayos; requisitos de entrada, visas, documentos, vacunas o tasas para uruguayos (Brasil, Argentina, EE. UU., Europa/ETIAS, etc.); cruceros que salen o paran en Uruguay; cambios de precios, impuestos o cotizaciones que afecten el costo del viaje; datos oficiales de turismo emisivo uruguayo.
-Puntúan medio (6-7): novedades de destinos muy elegidos por uruguayos, rankings internacionales relevantes, tendencias con impacto práctico.
-Puntúan bajo (1-5): noticias corporativas o financieras sin efecto en el pasajero, turismo receptivo sin interés para quien viaja al exterior, accidentes sin consecuencias operativas, publirreportajes, temas ya publicados.
+El sitio tiene un tono POSITIVO: queremos que la gente tenga ganas de viajar y confíe en hacerlo.
+
+Puntúan alto (8-10): rutas y frecuencias NUEVAS o ampliadas desde/hacia Montevideo o Punta del Este; cambios en visas, requisitos de entrada, políticas migratorias, documentos, vacunas o tasas que afecten a uruguayos (Brasil, Argentina, EE. UU., Europa/ETIAS/EES, Asia, etc.), incluidas exenciones de visa y nuevos trámites; cruceros que salen o paran en Uruguay; bajas de precios, tasas o impuestos y beneficios para el viajero; datos oficiales de turismo emisivo uruguayo.
+Puntúan medio (6-7): novedades atractivas de destinos muy elegidos por uruguayos (aperturas, eventos, temporadas), rankings internacionales, tendencias con impacto práctico.
+Puntúan bajo (1-5): noticias corporativas o financieras sin efecto en el pasajero, turismo receptivo sin interés para quien viaja al exterior, publirreportajes, temas ya publicados.
+
+PUNTAJE 1 OBLIGATORIO (no publicar nunca), aunque afecten a uruguayos:
+${(cfg.evitar?.temas || []).map((t) => '- ' + t).join('\n')}
+Un cambio migratorio que endurece requisitos SÍ se puede publicar: es información útil, no una mala noticia.
 
 Ya publicamos (no repetir):
 ${titulosPublicados.slice(0, 40).map((t) => '- ' + t).join('\n')}
@@ -177,7 +184,10 @@ Reglas de redacción:
 - Escribí con tus propias palabras: no copies oraciones de las fuentes. Como mucho una cita textual breve (menos de 15 palabras) si es imprescindible.
 - Usá solo datos que estén en las fuentes o que confirmes con la búsqueda. Nunca inventes cifras, fechas, precios ni nombres. Si algo no está confirmado, decilo o no lo pongas.
 - Fechas completas (día, mes y año). Precios con moneda y aclarando que son de referencia.
-- Pensá siempre: ¿qué cambia para alguien que sale desde Uruguay?`;
+- Pensá siempre: ¿qué cambia para alguien que sale desde Uruguay?
+- Tono positivo y tranquilizador: contá las novedades como oportunidades o datos útiles. Nada de alarmismo.
+- Si la historia trata de alguno de estos temas, devolvé {"es_relevante": false}: ${(cfg.evitar?.temas || []).join('; ')}.
+${(cfg.recomendaciones?.lista || []).map((r) => `- Si la nota trata de ${r.tema}, mencioná una sola vez y de forma natural a [${r.marca}](${r.url}), ${r.texto}.`).join('\n')}`;
 
 function promptRedaccion(grupo, textos) {
   const fuentesTxt = grupo

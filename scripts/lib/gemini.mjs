@@ -132,7 +132,8 @@ export async function gemini({ prompt, sistema, schema, buscar = false, temperat
         if (intento < 3) await sleep(2000);
         continue;
       }
-      return { texto, json: extraerJson(texto), modelo };
+      const fuentesWeb = (cand?.groundingMetadata?.groundingChunks || []).map((c) => c.web).filter((w) => w?.uri).map((w) => ({ titulo: w.title || '', url: w.uri }));
+      return { texto, json: extraerJson(texto), modelo, fuentesWeb, conBusqueda: buscar };
     }
   }
   if (cuposAgotados > 0) throw new CupoAgotado('el cupo gratuito de Gemini está agotado por ahora en todos los modelos disponibles');
@@ -153,4 +154,30 @@ export function extraerJson(texto) {
   } catch {
     return null;
   }
+}
+
+/**
+ * Las fuentes de la búsqueda de Google llegan como enlaces de redirección temporales.
+ * Esto los convierte en la dirección real de la página (para citarlas en forma permanente).
+ */
+export async function resolverFuentes(fuentesWeb = [], max = 6) {
+  const out = [];
+  for (const f of fuentesWeb.slice(0, 12)) {
+    let url = f.url;
+    try {
+      if (/vertexaisearch|grounding-api-redirect/.test(url)) {
+        const res = await fetch(url, { redirect: 'manual', signal: AbortSignal.timeout(10_000) });
+        url = res.headers.get('location') || '';
+      }
+    } catch {
+      url = '';
+    }
+    if (!url) url = /^[a-z0-9.-]+\.[a-z]{2,}$/i.test(f.titulo) ? `https://${f.titulo}/` : '';
+    if (!url) continue;
+    const host = new URL(url).hostname.replace(/^www\./, '');
+    if (out.some((x) => new URL(x.url).hostname.replace(/^www\./, '') === host)) continue;
+    out.push({ nombre: f.titulo && !/^https?:/.test(f.titulo) ? f.titulo : host, url });
+    if (out.length >= max) break;
+  }
+  return out;
 }

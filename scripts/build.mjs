@@ -12,7 +12,17 @@ import { esc, markdown, textoPlano } from './lib/markdown.mjs';
 import { commonsUrl, commonsPagina } from './lib/commons.mjs';
 
 const site = await readJson(p('config/site.json'));
-const noticias = (await readJson(p('data/news.json'), [])).sort((a, b) => b.fecha.localeCompare(a.fecha));
+const site0 = await readJson(p('config/site.json'));
+const ocultas = new Set(site0.ocultarNoticias || []);
+// data/news.json lo escribe el robot; data/editorial.json son notas escritas a mano (nunca las toca el robot).
+const editorial = (await readJson(p('data/editorial.json'), { notas: [] })).notas.filter((n) => n.publicar !== false).map((n) => ({ origen: 'manual', ...n }));
+const noticias = [...(await readJson(p('data/news.json'), [])), ...editorial]
+  .filter((n) => !ocultas.has(n.slug) && !ocultas.has(n.id))
+  .filter((n, i, arr) => arr.findIndex((x) => x.slug === n.slug) === i)
+  .sort((a, b) => b.fecha.localeCompare(a.fecha));
+const esGuia = (n) => n.tipo === 'guia';
+const soloNoticias = noticias.filter((n) => !esGuia(n));
+const soloGuias = noticias.filter(esGuia);
 const agencias = await readJson(p('data/agencias.json'));
 const destinos = await readJson(p('data/destinos.json'));
 const imagenes = await readJson(p('data/imagenes.json'));
@@ -25,11 +35,11 @@ const TZ = site.zonaHoraria || 'America/Montevideo';
 
 const CATEGORIAS = {
   vuelos: { nombre: 'Vuelos', desc: 'Nuevas rutas desde Carrasco, frecuencias, cancelaciones y cambios de las aerolíneas que vuelan desde Uruguay.' },
-  requisitos: { nombre: 'Requisitos y trámites', desc: 'Documentos, visas, vacunas y requisitos de entrada para uruguayos que viajan al exterior.' },
+  requisitos: { nombre: 'Requisitos y migraciones', desc: 'Visas, vacunas, documentos y cambios en las políticas migratorias: lo que necesitás para pasar migraciones sin sorpresas.' },
   cruceros: { nombre: 'Cruceros', desc: 'Salidas desde Montevideo y Punta del Este, navieras, temporadas y consejos para cruceristas.' },
   destinos: { nombre: 'Destinos', desc: 'Novedades de los destinos más elegidos por los uruguayos: Brasil, Argentina, el Caribe, Estados Unidos y Europa.' },
   ofertas: { nombre: 'Precios y ofertas', desc: 'Tarifas, impuestos, cotizaciones y todo lo que cambia el costo de tu viaje.' },
-  guias: { nombre: 'Guías', desc: 'Cómo llegar, cuándo ir y qué tener en cuenta, explicado para quien sale desde Uruguay.' },
+  guias: { nombre: 'Guías de viaje', desc: 'Playas, ciudades, cuándo ir y consejos prácticos para tus próximos destinos, pensados para quien sale desde Uruguay.' },
   datos: { nombre: 'Datos', desc: 'Estadísticas oficiales de turismo emisivo: a dónde viajan los uruguayos y cuánto gastan.' },
   'turismo-receptivo': { nombre: 'Turismo en Uruguay', desc: 'Temporada, balances y escapadas dentro del país.' },
 };
@@ -48,7 +58,7 @@ const mapsLink = (a) => a.mapa || `https://www.google.com/maps/search/?api=1&que
 const mapsEmbed = (a) => `https://www.google.com/maps?q=${encodeURIComponent(a.mapaBusqueda || a.nombre)}&output=embed`;
 
 function imagen(clave) {
-  const img = imagenes.lista.find((i) => i.clave === clave) || imagenes.lista[0];
+  const img = imagenes.lista.find((i) => i.clave === clave) || imagenes.lista.find((i) => i.clave === 'carrasco') || imagenes.lista[0];
   const local = ['jpg', 'png', 'webp'].map((e) => `img/${img.clave}.${e}`).find((f) => existsSync(p('static', f)));
   return {
     src: local ? u('/' + local) : commonsUrl(img.archivo, 1280),
@@ -106,8 +116,9 @@ function cabecera(activo = '') {
   const nav = [
     ['/', 'Inicio', 'inicio'],
     ['/noticias/', 'Noticias', 'noticias'],
-    ['/categoria/vuelos/', 'Vuelos', 'vuelos'],
+    ['/categoria/guias/', 'Guías de viaje', 'guias'],
     ['/categoria/requisitos/', 'Requisitos', 'requisitos'],
+    ['/categoria/vuelos/', 'Vuelos', 'vuelos'],
     ['/categoria/cruceros/', 'Cruceros', 'cruceros'],
     ['/ranking-destinos/', 'Destinos', 'destinos'],
     ['/ranking-agencias/', 'Agencias', 'agencias'],
@@ -125,7 +136,7 @@ function cabecera(activo = '') {
 }
 
 function tablero() {
-  const filas = noticias.slice(0, 6);
+  const filas = (soloNoticias.length >= 4 ? soloNoticias : noticias).slice(0, 6);
   return `<section class="tablero" aria-labelledby="tablero-t">
   <div class="tablero-in">
     <h2 id="tablero-t" class="tablero-tit">Último momento <span>Actualizado ${mismoDia(noticias[0]?.fecha || AHORA.toISOString()) ? 'hoy' : 'el ' + diaMes(noticias[0]?.fecha || AHORA.toISOString())} a las ${hora(noticias[0]?.fecha || AHORA.toISOString())}</span></h2>
@@ -260,7 +271,7 @@ function tarjeta(n, { grande = false, nivel = 3 } = {}) {
   return `<article class="${grande ? 'nota-g' : 'nota-l'}">
   <a class="nota-img" href="${u(urlNoticia(n))}" tabindex="-1" aria-hidden="true"><img src="${esc(im.src)}" alt="" loading="${grande ? 'eager' : 'lazy'}" ${grande ? 'fetchpriority="high"' : ''} decoding="async"></a>
   <div class="nota-tx">
-    <p class="nota-meta"><a href="${u(`/categoria/${n.categoria}/`)}">${esc(cat)}</a> <time datetime="${n.fecha}">${fecha(n.fecha)}</time></p>
+    <p class="nota-meta"><a href="${u(`/categoria/${n.categoria}/`)}">${esc(cat)}</a>${esGuia(n) ? ' <span class="tipo-guia">Guía</span>' : ''} <time datetime="${n.fecha}">${fecha(n.fecha)}</time></p>
     <h${nivel}><a href="${u(urlNoticia(n))}">${esc(n.titulo)}</a></h${nivel}>
     <p class="nota-baj">${esc(n.bajada)}</p>
   </div>
@@ -324,8 +335,10 @@ const escribir = (ruta, html) => salidas.set(ruta, html);
 
 // Portada
 {
-  const [lead, ...resto] = noticias;
+  const base = soloNoticias.length ? soloNoticias : noticias;
+  const [lead, ...resto] = base;
   const lista = resto.slice(0, (site.noticiasPorPortada || 12) - 1);
+  const guiasPortada = soloGuias.slice(0, 4);
   const cuerpo = `
   <h1 class="oculto">${esc(site.nombre)}: noticias de viajes para uruguayos</h1>
   ${lead ? `<section class="portada" aria-label="Nota principal">${tarjeta(lead, { grande: true, nivel: 2 })}</section>` : '<p>Pronto vas a ver acá las primeras noticias.</p>'}
@@ -334,6 +347,15 @@ const escribir = (ruta, html) => salidas.set(ruta, html);
     <div class="lista">${lista.map((n) => tarjeta(n)).join('')}</div>
     <p class="mas"><a class="btn" href="${u('/noticias/')}">Ver todas las noticias</a></p>
   </section>
+  ${
+    guiasPortada.length
+      ? `<section aria-labelledby="gu-t">
+    <h2 id="gu-t" class="sec-t">Guías para tu próximo viaje</h2>
+    <div class="lista">${guiasPortada.map((n) => tarjeta(n)).join('')}</div>
+    <p class="mas"><a class="btn" href="${u('/categoria/guias/')}">Ver todas las guías</a> <a class="btn" href="${u('/categoria/requisitos/')}">Requisitos y migraciones</a></p>
+  </section>`
+      : ''
+  }
   <section aria-labelledby="temas-t" class="temas">
     <h2 id="temas-t" class="sec-t">Explorá por tema</h2>
     <ul>${Object.entries(CATEGORIAS)
@@ -371,7 +393,7 @@ for (const n of noticias) {
   const ruta = urlNoticia(n);
   const ld = {
     '@context': 'https://schema.org',
-    '@type': 'NewsArticle',
+    '@type': esGuia(n) ? 'BlogPosting' : 'NewsArticle',
     '@id': abs(ruta) + '#nota',
     mainEntityOfPage: abs(ruta),
     headline: n.titulo.slice(0, 110),
@@ -401,7 +423,7 @@ for (const n of noticias) {
   ${migasHtml([['Inicio', '/'], [cat.nombre, `/categoria/${n.categoria}/`], [n.titulo, ruta]])}
   <article class="art">
     <header class="art-cab">
-      <p class="nota-meta"><a href="${u(`/categoria/${n.categoria}/`)}">${esc(cat.nombre)}</a> <time datetime="${n.fecha}">${fecha(n.fecha)}</time>${n.actualizado ? ` <span>Actualizada el ${fecha(n.actualizado)}</span>` : ''}</p>
+      <p class="nota-meta"><a href="${u(`/categoria/${n.categoria}/`)}">${esc(cat.nombre)}</a>${esGuia(n) ? ' <span class="tipo-guia">Guía</span>' : ''} <time datetime="${n.fecha}">${fecha(n.fecha)}</time>${n.actualizado ? ` <span>Actualizada el ${fecha(n.actualizado)}</span>` : ''}</p>
       <h1>${esc(n.titulo)}</h1>
       <p class="art-baj">${esc(n.bajada)}</p>
     </header>
@@ -414,6 +436,7 @@ for (const n of noticias) {
         ? `<section class="clave" aria-labelledby="clave-t"><h2 id="clave-t">En breve</h2><ul>${n.puntosClave.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></section>`
         : ''
     }
+    ${n.categoria === 'requisitos' ? `<p class="aviso-req">Información verificada el ${fecha(n.actualizado || n.fecha)}. Los requisitos migratorios y sanitarios pueden cambiar: antes de viajar, confirmalos con la embajada o el consulado del país de destino.</p>` : ''}
     <div class="art-cuerpo">${markdown(n.cuerpo)}</div>
     ${
       n.faq?.length
@@ -425,7 +448,7 @@ for (const n of noticias) {
     <footer class="art-pie">
       ${n.fuentes?.length ? `<p class="fuentes"><b>${n.fuentes.length > 1 ? 'Fuentes' : 'Fuente'}:</b> ${n.fuentes.map((f) => `<a href="${esc(f.url)}" rel="noopener nofollow" target="_blank">${esc(f.nombre)}</a>`).join(', ')}</p>` : ''}
       ${n.etiquetas?.length ? `<p class="etq">${n.etiquetas.map((e) => `<span>${esc(e)}</span>`).join('')}</p>` : ''}
-      ${n.origen === 'ia' ? `<p class="nota-ia">Nota redactada con asistencia de inteligencia artificial a partir de las fuentes citadas. Confirmá horarios, precios y requisitos con el proveedor u organismo oficial antes de viajar.</p>` : ''}
+      ${n.origen === 'ia' ? `<p class="nota-ia">${esGuia(n) ? 'Guía redactada' : 'Nota redactada'} con asistencia de inteligencia artificial a partir de las fuentes citadas. Confirmá horarios, precios y requisitos con el proveedor u organismo oficial antes de viajar.</p>` : ''}
     </footer>
   </article>
   <section class="cta-ag" aria-label="Agencia recomendada">
@@ -634,7 +657,7 @@ const urlsSitemap = [...salidas.keys()]
 await writeFile(join(DIST, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n${urlsSitemap.join('\n')}\n</urlset>\n`);
 
 // Sitemap de Google Noticias: solo notas de las últimas 48 h
-const recientes = noticias.filter((n) => AHORA - new Date(n.fecha) < 48 * 3600e3);
+const recientes = soloNoticias.filter((n) => AHORA - new Date(n.fecha) < 48 * 3600e3);
 await writeFile(
   join(DIST, 'news-sitemap.xml'),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">\n${recientes

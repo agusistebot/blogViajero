@@ -9,10 +9,11 @@
   },
   "scripts": {
     "actualizar": "node scripts/update-news.mjs",
+    "guias": "node scripts/write-guides.mjs",
     "imagenes": "node scripts/fetch-images.mjs",
     "build": "node scripts/build.mjs",
     "dev": "node scripts/build.mjs && node scripts/serve.mjs",
-    "todo": "node scripts/update-news.mjs && node scripts/fetch-images.mjs && node scripts/build.mjs"
+    "todo": "node scripts/write-guides.mjs && node scripts/update-news.mjs && node scripts/fetch-images.mjs && node scripts/build.mjs"
   },
   "license": "UNLICENSED"
 }

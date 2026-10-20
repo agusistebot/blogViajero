@@ -10,10 +10,6 @@
       "region": "UY"
     },
     {
-      "q": "aerolínea Uruguay vuelos cancelados OR suspendidos",
-      "region": "UY"
-    },
-    {
       "q": "uruguayos viajar requisitos",
       "region": "UY"
     },
@@ -83,6 +79,35 @@
     {
       "q": "site:sirchandler.com.ar",
       "region": "AR"
+    },
+    {
+      "q": "visa uruguayos",
+      "region": "UY"
+    },
+    {
+      "q": "\"exención de visa\" OR \"sin visa\" OR \"eliminan la visa\" uruguayos OR latinoamericanos",
+      "region": "UY"
+    },
+    {
+      "q": "requisitos migratorios turistas nueva política",
+      "region": "UY"
+    },
+    {
+      "q": "Cancillería Uruguay pasaporte OR visa OR consulado",
+      "region": "UY"
+    },
+    {
+      "q": "vacuna fiebre amarilla viajeros requisito",
+      "region": "UY"
+    },
+    {
+      "q": "ETIAS OR \"Sistema de Entradas y Salidas\" viajeros latinoamericanos",
+      "region": "UY"
+    },
+    {
+      "q": "visa-free entry new policy tourists",
+      "region": "US",
+      "idioma": "en"
     }
   ],
   "rss": [
