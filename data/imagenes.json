@@ -157,6 +157,16 @@
         "Uruguay"
       ],
       "auto": true
+    },
+    {
+      "clave": "ruta-auto",
+      "descripcion": "car on scenic road",
+      "alt": "Scenic car park",
+      "archivo": "Scenic car park - geograph.org.uk - 4723007.jpg",
+      "autor": "John H Darch",
+      "licencia": "CC BY-SA 2.0",
+      "temas": [],
+      "auto": true
     }
   ],
   "porCategoria": {
