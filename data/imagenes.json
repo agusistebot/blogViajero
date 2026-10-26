@@ -179,6 +179,18 @@
         "Nordeste de Brasil"
       ],
       "auto": true
+    },
+    {
+      "clave": "cancun-beach-turquoise-sea-mexico",
+      "descripcion": "cancun beach turquoise sea mexico",
+      "alt": "The Caribbean Sea at Cancún, Quintana Roo, Mexico",
+      "archivo": "Cancún 1986 05.jpg",
+      "autor": "LBM1948",
+      "licencia": "CC BY-SA 4.0",
+      "temas": [
+        "México"
+      ],
+      "auto": true
     }
   ],
   "porCategoria": {
