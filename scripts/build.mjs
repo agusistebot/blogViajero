@@ -256,11 +256,7 @@ function suscripcion() {
   <div class="susc-in">
     <h2 id="su-t">Recibí las noticias de viaje</h2>
     <p>Nuevas rutas, cambios en requisitos y ofertas para viajar desde Uruguay.</p>
-    ${
-      nl.action
-        ? `<form class="susc-f" action="${esc(nl.action)}" method="post" target="_blank"><label for="su-mail">Tu correo</label><input id="su-mail" type="email" name="${esc(nl.campoEmail || 'email')}" required autocomplete="email" placeholder="nombre@correo.com"><button type="submit">Suscribirme</button></form>`
-        : `<p><a class="btn btn-prim" href="${u('/feed.xml')}">Seguir por RSS</a></p>`
-    }
+    <p><a class="btn btn-prim" href="info@blogdelviajero.com.uy">Escribinos</a></p>
   </div>
 </section>`;
 }
