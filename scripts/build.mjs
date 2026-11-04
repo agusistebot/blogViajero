@@ -12,20 +12,31 @@ import { esc, markdown, textoPlano } from './lib/markdown.mjs';
 import { commonsUrl, commonsPagina } from './lib/commons.mjs';
 
 const site = await readJson(p('config/site.json'));
-const site0 = await readJson(p('config/site.json'));
-const ocultas = new Set(site0.ocultarNoticias || []);
+const ocultas = new Set(site.ocultarNoticias || []);
+
+// Una fecha "AAAA-MM-DD" sin hora se toma como mediodía en Uruguay.
+// Si no, new Date() la lee como medianoche UTC y en Montevideo se ve un día antes.
+const conHora = (f) => (typeof f === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(f) ? `${f}T12:00:00-03:00` : f);
+const normalizar = (n) => ({ ...n, fecha: conHora(n.fecha), ...(n.actualizado ? { actualizado: conHora(n.actualizado) } : {}) });
+
 // data/news.json lo escribe el robot; data/editorial.json son notas escritas a mano (nunca las toca el robot).
-const editorial = (await readJson(p('data/editorial.json'), { notas: [] })).notas.filter((n) => n.publicar !== false).map((n) => ({ origen: 'manual', ...n }));
-const noticias = [...(await readJson(p('data/news.json'), [])), ...editorial]
+// Las manuales van primero para que, si comparten slug con una del robot, gane la manual.
+const editorial = ((await readJson(p('data/editorial.json'), { notas: [] })).notas || [])
+  .filter((n) => n.publicar !== false)
+  .map((n) => ({ origen: 'manual', ...n }));
+const delRobot = (await readJson(p('data/news.json'), [])).map((n) => ({ origen: 'ia', ...n }));
+const noticias = [...editorial, ...delRobot]
+  .map(normalizar)
   .filter((n) => !ocultas.has(n.slug) && !ocultas.has(n.id))
   .filter((n, i, arr) => arr.findIndex((x) => x.slug === n.slug) === i)
-  .sort((a, b) => b.fecha.localeCompare(a.fecha));
+  .sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
 const esGuia = (n) => n.tipo === 'guia';
 const soloNoticias = noticias.filter((n) => !esGuia(n));
 const soloGuias = noticias.filter(esGuia);
 const agencias = await readJson(p('data/agencias.json'));
 const destinos = await readJson(p('data/destinos.json'));
 const imagenes = await readJson(p('data/imagenes.json'));
+const primera = agencias.lista[0];
 
 const SITE_URL = (process.env.SITE_URL || site.url).replace(/\/+$/, '');
 const BASE = new URL(SITE_URL + '/').pathname.replace(/\/+$/, ''); // '' o '/repo'
@@ -44,6 +55,10 @@ const CATEGORIAS = {
   'turismo-receptivo': { nombre: 'Turismo en Uruguay', desc: 'Temporada, balances y escapadas dentro del país.' },
 };
 
+// Secciones con lugar propio en el menú; las demás marcan "Noticias" como activa.
+const EN_MENU = new Set(['guias', 'requisitos', 'vuelos', 'cruceros']);
+const activoDe = (cat) => (EN_MENU.has(cat) ? cat : 'noticias');
+
 // ---------- utilidades ----------
 const u = (path = '/') => BASE + path;
 const abs = (path = '/') => (/^https?:/.test(path) ? path : SITE_URL + path);
@@ -52,10 +67,11 @@ const fmt = (iso, opts) => new Intl.DateTimeFormat('es-UY', { timeZone: TZ, ...o
 const fecha = (iso) => fmt(iso, { day: 'numeric', month: 'long', year: 'numeric' });
 const hora = (iso) => fmt(iso, { hour: '2-digit', minute: '2-digit', hour12: false });
 const diaMes = (iso) => `${fmt(iso, { day: 'numeric' })} ${fmt(iso, { month: 'short' }).replace('.', '').toLowerCase()}`;
-const mismoDia = (iso) => fmt(iso, { dateStyle: 'short' }) === fmt(AHORA.toISOString(), { dateStyle: 'short' });
 const json = (o) => JSON.stringify(o).replace(/</g, '\\u003c');
 const mapsLink = (a) => a.mapa || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a.mapaBusqueda || `${a.nombre}, ${a.ciudad || 'Uruguay'}`)}`;
-const mapsEmbed = (a) => `https://www.google.com/maps?q=${encodeURIComponent(a.mapaBusqueda || a.nombre)}&output=embed`;
+const mapsEmbed = (a) => `https://www.google.com/maps?q=${encodeURIComponent(a.mapaBusqueda || [a.nombre, a.direccion, a.ciudad || 'Uruguay'].filter(Boolean).join(', '))}&output=embed`;
+// Con "patrocinada": true en agencias.json, los enlaces a esa agencia llevan rel="sponsored" (lo pide Google para enlaces comerciales).
+const relAg = (a) => (a.patrocinada ? 'noopener sponsored' : 'noopener');
 
 function imagen(clave) {
   const img = imagenes.lista.find((i) => i.clave === clave) || imagenes.lista.find((i) => i.clave === 'carrasco') || imagenes.lista[0];
@@ -66,12 +82,15 @@ function imagen(clave) {
     alt: img.alt || img.descripcion,
     credito: img.autor ? `${img.autor}${img.licencia ? ', ' + img.licencia : ''}` : 'Wikimedia Commons',
     pagina: commonsPagina(img.archivo),
+    // Opcional: "ancho" y "alto" en imagenes.json reservan el espacio de la foto y evitan saltos al cargar.
+    dim: img.ancho && img.alto ? ` width="${img.ancho}" height="${img.alto}"` : '',
   };
 }
 const imgDe = (n) => imagen(n.imagen?.clave);
 
 // ---------- piezas ----------
 const SOL = `<svg class="sol" viewBox="0 0 64 64" aria-hidden="true"><g fill="currentColor"><circle cx="32" cy="32" r="12"/>${Array.from({ length: 16 }, (_, i) => `<path d="M32 2 l${i % 2 ? 2.2 : 3} 13 h-${i % 2 ? 4.4 : 6} z" transform="rotate(${i * 22.5} 32 32)"/>`).join('')}</g></svg>`;
+const SELLO = `<p class="sello">${SOL}La elegida del Blog del Viajero</p>`;
 
 function head({ titulo, descripcion, ruta, imagenAbs, tipo = 'website', jsonld = [], extraMeta = '', noindex = false }) {
   const tituloCompleto = titulo === site.nombre ? `${site.nombre} · Noticias de viajes para uruguayos` : `${titulo} | ${site.nombre}`;
@@ -120,14 +139,16 @@ function cabecera(activo = '') {
     ['/categoria/requisitos/', 'Requisitos', 'requisitos'],
     ['/categoria/vuelos/', 'Vuelos', 'vuelos'],
     ['/categoria/cruceros/', 'Cruceros', 'cruceros'],
-    ['/ranking-destinos/', 'Destinos', 'destinos'],
-    ['/ranking-agencias/', 'Agencias', 'agencias'],
+    ['/ranking-destinos/', 'Destinos', 'rk-destinos'],
+    ['/ranking-agencias/', 'Agencias', 'rk-agencias'],
   ];
+  // La fecha del día la pone el navegador: el sitio se genera una vez y la fecha del build quedaría vieja.
   return `<a class="saltar" href="#contenido">Saltar al contenido</a>
 <header class="cab">
   <div class="cab-in">
     <a class="marca" href="${u('/')}" aria-label="${esc(site.nombre)}, inicio">${SOL}<span class="marca-t"><b>Blog del Viajero</b><span>Uruguayo</span></span></a>
-    <p class="cab-fecha">${esc(site.ciudad)}, ${fmt(AHORA.toISOString(), { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</p>
+    <p class="cab-fecha">${esc(site.ciudad)}<span id="cab-hoy"></span></p>
+    <script>try{document.getElementById('cab-hoy').textContent=', '+new Intl.DateTimeFormat('es-UY',{timeZone:${json(TZ)},weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(new Date())}catch(e){}</script>
   </div>
   <nav class="nav" aria-label="Secciones"><ul>${nav
     .map(([h, t, k]) => `<li><a href="${u(h)}"${k === activo ? ' aria-current="page"' : ''}>${t}</a></li>`)
@@ -137,13 +158,15 @@ function cabecera(activo = '') {
 
 function tablero() {
   const filas = (soloNoticias.length >= 4 ? soloNoticias : noticias).slice(0, 6);
+  const ultima = noticias[0]?.fecha || AHORA.toISOString();
+  // Fechas absolutas: un "hoy" calculado al generar el sitio deja de ser cierto al día siguiente.
   return `<section class="tablero" aria-labelledby="tablero-t">
   <div class="tablero-in">
-    <h2 id="tablero-t" class="tablero-tit">Último momento <span>Actualizado ${mismoDia(noticias[0]?.fecha || AHORA.toISOString()) ? 'hoy' : 'el ' + diaMes(noticias[0]?.fecha || AHORA.toISOString())} a las ${hora(noticias[0]?.fecha || AHORA.toISOString())}</span></h2>
+    <h2 id="tablero-t" class="tablero-tit">Último momento <span>Actualizado el ${diaMes(ultima)} a las ${hora(ultima)}</span></h2>
     <ol class="tablero-filas">
       ${filas
         .map(
-          (n) => `<li><a href="${u(urlNoticia(n))}"><time datetime="${n.fecha}">${mismoDia(n.fecha) ? hora(n.fecha) : diaMes(n.fecha)}</time><span class="tb-tit">${esc(n.titulo)}</span><span class="tb-sec">${esc(CATEGORIAS[n.categoria]?.nombre || 'Noticias')}</span></a></li>`
+          (n) => `<li><a href="${u(urlNoticia(n))}"><time datetime="${n.fecha}">${diaMes(n.fecha)}</time><span class="tb-tit">${esc(n.titulo)}</span><span class="tb-sec">${esc(CATEGORIAS[n.categoria]?.nombre || 'Noticias')}</span></a></li>`
         )
         .join('')}
     </ol>
@@ -153,8 +176,8 @@ function tablero() {
 
 function agenciaContacto(a, completo = false) {
   const links = [];
-  if (a.web) links.push(`<a class="btn btn-prim" href="${esc(a.linkOfertas || a.web)}" rel="noopener" target="_blank">${a.linkOfertas ? 'Ver ofertas' : 'Ir a la web'}</a>`);
-  if (a.whatsapp) links.push(`<a class="btn btn-wa" href="https://wa.me/${esc(a.whatsapp)}" rel="noopener" target="_blank">WhatsApp</a>`);
+  if (a.web) links.push(`<a class="btn btn-prim" href="${esc(a.linkOfertas || a.web)}" rel="${relAg(a)}" target="_blank">${a.linkOfertas ? 'Ver ofertas' : 'Ir a la web'}</a>`);
+  if (a.whatsapp) links.push(`<a class="btn btn-wa" href="https://wa.me/${esc(a.whatsapp)}" rel="${relAg(a)}" target="_blank">WhatsApp</a>`);
   if (a.telefono && completo) links.push(`<a class="btn" href="tel:${esc(a.telefono.replace(/[^+\d]/g, ''))}">Llamar</a>`);
   links.push(`<a class="btn" href="${esc(mapsLink(a))}" rel="noopener" target="_blank">Ver en Google Maps</a>`);
   return `<div class="ag-acc">${links.join('')}</div>`;
@@ -170,8 +193,8 @@ function lateral() {
       <li class="rk-top">
         <span class="rk-n" aria-hidden="true">1</span>
         <div class="rk-c">
-          <p class="sello">${SOL}La elegida del Blog del Viajero</p>
-          <h3><a href="${u('/ranking-agencias/')}#${top.id}">${esc(top.nombre)}</a></h3>
+          ${top.destacada ? SELLO : ''}
+          <h3><a href="${u('/ranking-agencias/')}#${esc(top.id)}">${esc(top.nombre)}</a></h3>
           <p class="rk-lema">${esc(top.lema)}</p>
           ${top.direccion ? `<p class="rk-dir">${esc(top.direccion)}, ${esc(top.ciudad)}${top.horario ? `<br>${esc(top.horario)}` : ''}</p>` : ''}
           ${top.telefono ? `<p class="rk-dir">Tel. <a href="tel:${esc(top.telefono.replace(/[^+\d]/g, ''))}">${esc(top.telefono)}</a></p>` : ''}
@@ -183,9 +206,9 @@ function lateral() {
           (a, i) => `<li>
         <span class="rk-n" aria-hidden="true">${i + 2}</span>
         <div class="rk-c">
-          <h3><a href="${u('/ranking-agencias/')}#${a.id}">${esc(a.nombre)}</a></h3>
+          <h3><a href="${u('/ranking-agencias/')}#${esc(a.id)}">${esc(a.nombre)}</a></h3>
           <p class="rk-lema">${esc(a.lema)}</p>
-          <p class="rk-links">${a.web ? `<a href="${esc(a.web)}" rel="noopener" target="_blank">Web</a>` : ''}<a href="${esc(mapsLink(a))}" rel="noopener" target="_blank">Mapa</a>${a.whatsapp ? `<a href="https://wa.me/${esc(a.whatsapp)}" rel="noopener" target="_blank">WhatsApp</a>` : ''}</p>
+          <p class="rk-links">${a.web ? `<a href="${esc(a.web)}" rel="${relAg(a)}" target="_blank">Web</a>` : ''}<a href="${esc(mapsLink(a))}" rel="noopener" target="_blank">Mapa</a>${a.whatsapp ? `<a href="https://wa.me/${esc(a.whatsapp)}" rel="${relAg(a)}" target="_blank">WhatsApp</a>` : ''}</p>
         </div>
       </li>`
         )
@@ -231,7 +254,7 @@ function pie() {
       </ul>
     </nav>
   </div>
-  <p class="pie-cr">© ${AHORA.getFullYear()} ${esc(site.nombre)}. Fotos de Wikimedia Commons con licencias libres; créditos en cada nota.</p>
+  <p class="pie-cr">© ${fmt(AHORA.toISOString(), { year: 'numeric' })} ${esc(site.nombre)}. Fotos de Wikimedia Commons con licencias libres; créditos en cada nota.</p>
 </footer>`;
 }
 
@@ -251,12 +274,12 @@ ${pie()}
 }
 
 function suscripcion() {
-  const nl = site.newsletter || {};
+  const correo = site.email || 'info@blogdelviajero.com.uy';
   return `<section class="susc" aria-labelledby="su-t">
   <div class="susc-in">
     <h2 id="su-t">Recibí las noticias de viaje</h2>
     <p>Nuevas rutas, cambios en requisitos y ofertas para viajar desde Uruguay.</p>
-    <p><a class="btn btn-prim" href="info@blogdelviajero.com.uy">Escribinos</a></p>
+    <p><a class="btn btn-prim" href="mailto:${esc(correo)}">Escribinos</a></p>
   </div>
 </section>`;
 }
@@ -265,7 +288,7 @@ function tarjeta(n, { grande = false, nivel = 3 } = {}) {
   const im = imgDe(n);
   const cat = CATEGORIAS[n.categoria]?.nombre || 'Noticias';
   return `<article class="${grande ? 'nota-g' : 'nota-l'}">
-  <a class="nota-img" href="${u(urlNoticia(n))}" tabindex="-1" aria-hidden="true"><img src="${esc(im.src)}" alt="" loading="${grande ? 'eager' : 'lazy'}" ${grande ? 'fetchpriority="high"' : ''} decoding="async"></a>
+  <a class="nota-img" href="${u(urlNoticia(n))}" tabindex="-1" aria-hidden="true"><img src="${esc(im.src)}" alt=""${im.dim} loading="${grande ? 'eager' : 'lazy'}" ${grande ? 'fetchpriority="high"' : ''} decoding="async"></a>
   <div class="nota-tx">
     <p class="nota-meta"><a href="${u(`/categoria/${n.categoria}/`)}">${esc(cat)}</a>${esGuia(n) ? ' <span class="tipo-guia">Guía</span>' : ''} <time datetime="${n.fecha}">${fecha(n.fecha)}</time></p>
     <h${nivel}><a href="${u(urlNoticia(n))}">${esc(n.titulo)}</a></h${nivel}>
@@ -317,7 +340,8 @@ function agenciaLd(a, pos) {
       url: a.web,
       ...(a.telefono ? { telephone: a.telefono } : {}),
       ...(a.email ? { email: a.email } : {}),
-      ...(a.horario ? { openingHours: 'Mo-Fr 09:00-18:00' } : {}),
+      // Formato schema.org, en agencias.json. Ej.: "openingHours": "Mo-Fr 10:00-19:00" o ["Mo-Fr 09:00-18:00", "Sa 09:00-13:00"]
+      ...(a.openingHours ? { openingHours: a.openingHours } : {}),
       hasMap: mapsLink(a),
       address: { '@type': 'PostalAddress', ...(a.direccion ? { streetAddress: a.direccion } : {}), addressLocality: a.ciudad || 'Montevideo', addressCountry: 'UY' },
       ...(a.redes?.length ? { sameAs: a.redes } : {}),
@@ -424,7 +448,7 @@ for (const n of noticias) {
       <p class="art-baj">${esc(n.bajada)}</p>
     </header>
     <figure class="art-fig">
-      <img src="${esc(im.src)}" alt="${esc(im.alt)}" fetchpriority="high" decoding="async">
+      <img src="${esc(im.src)}" alt="${esc(im.alt)}"${im.dim} fetchpriority="high" decoding="async">
       <figcaption>${esc(im.alt)}. Foto: <a href="${esc(im.pagina)}" rel="noopener" target="_blank">${esc(im.credito)}</a></figcaption>
     </figure>
     ${
@@ -448,14 +472,14 @@ for (const n of noticias) {
     </footer>
   </article>
   <section class="cta-ag" aria-label="Agencia recomendada">
-    <p>¿Querés armar este viaje con alguien que te acompañe? <a href="${esc(agencias.lista[0].web)}" rel="noopener" target="_blank">${esc(agencias.lista[0].nombre)}</a>, la agencia número 1 de nuestro ranking, te cotiza${agencias.lista[0].whatsapp ? ` por <a href="https://wa.me/${esc(agencias.lista[0].whatsapp)}" rel="noopener" target="_blank">WhatsApp</a>` : ''}.</p>
+    <p>¿Querés armar este viaje con alguien que te acompañe? <a href="${esc(primera.web)}" rel="${relAg(primera)}" target="_blank">${esc(primera.nombre)}</a>, la agencia número 1 de nuestro ranking, te cotiza${primera.whatsapp ? ` por <a href="https://wa.me/${esc(primera.whatsapp)}" rel="${relAg(primera)}" target="_blank">WhatsApp</a>` : ''}.</p>
   </section>
   ${relacionadas.length ? `<section aria-labelledby="rel-t"><h2 id="rel-t" class="sec-t">Seguí leyendo</h2><div class="lista">${relacionadas.map((x) => tarjeta(x)).join('')}</div></section>` : ''}`;
 
   escribir(
     ruta,
     pagina({
-      activo: n.categoria,
+      activo: activoDe(n.categoria),
       titulo: n.titulo,
       descripcion: n.bajada,
       ruta,
@@ -508,7 +532,7 @@ function listado({ base, titulo, descripcion, items, activo }) {
 }
 listado({ base: '/noticias/', titulo: 'Todas las noticias de viajes', descripcion: 'Noticias de vuelos, requisitos, cruceros y destinos para viajeros uruguayos, de la más reciente a la más antigua.', items: noticias, activo: 'noticias' });
 for (const [k, c] of Object.entries(CATEGORIAS)) {
-  listado({ base: `/categoria/${k}/`, titulo: c.nombre, descripcion: c.desc, items: conFijadas(noticias.filter((n) => n.categoria === k), k), activo: k });
+  listado({ base: `/categoria/${k}/`, titulo: c.nombre, descripcion: c.desc, items: conFijadas(noticias.filter((n) => n.categoria === k), k), activo: activoDe(k) });
 }
 
 // Ranking de agencias
@@ -521,19 +545,19 @@ for (const [k, c] of Object.entries(CATEGORIAS)) {
   <ol class="rk-full">
     ${agencias.lista
       .map(
-        (a, i) => `<li id="${a.id}" class="${a.destacada ? 'rkf rkf-top' : 'rkf'}">
+        (a, i) => `<li id="${esc(a.id)}" class="${a.destacada ? 'rkf rkf-top' : 'rkf'}">
       <div class="rkf-n" aria-hidden="true">${i + 1}</div>
       <div class="rkf-c">
-        ${a.destacada ? `<p class="sello">${SOL}La elegida del Blog del Viajero</p>` : ''}
+        ${a.destacada ? SELLO : ''}
         <h2>${esc(a.nombre)}</h2>
         <p class="rk-lema">${esc(a.lema)}</p>
         <p>${esc(a.descripcion)}</p>
         ${a.puntos?.length ? `<ul class="rkf-p">${a.puntos.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
         ${a.etiquetas?.length ? `<p class="etq">${a.etiquetas.map((e) => `<span>${esc(e)}</span>`).join('')}</p>` : ''}
         <dl class="rkf-dat">
-          ${a.web ? `<div><dt>Web</dt><dd><a href="${esc(a.web)}" rel="noopener" target="_blank">${esc(a.web.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, ''))}</a></dd></div>` : ''}
+          ${a.web ? `<div><dt>Web</dt><dd><a href="${esc(a.web)}" rel="${relAg(a)}" target="_blank">${esc(a.web.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, ''))}</a></dd></div>` : ''}
           ${a.telefono ? `<div><dt>Teléfono</dt><dd><a href="tel:${esc(a.telefono.replace(/[^+\d]/g, ''))}">${esc(a.telefono)}</a></dd></div>` : ''}
-          ${a.whatsapp ? `<div><dt>WhatsApp</dt><dd><a href="https://wa.me/${esc(a.whatsapp)}" rel="noopener" target="_blank">+${esc(a.whatsapp.replace(/^(\d{3})(\d{2})(\d{3})(\d{3})$/, '$1 $2 $3 $4'))}</a></dd></div>` : ''}
+          ${a.whatsapp ? `<div><dt>WhatsApp</dt><dd><a href="https://wa.me/${esc(a.whatsapp)}" rel="${relAg(a)}" target="_blank">+${esc(a.whatsapp.replace(/^(\d{3})(\d{2})(\d{3})(\d{3})$/, '$1 $2 $3 $4'))}</a></dd></div>` : ''}
           ${a.email ? `<div><dt>Correo</dt><dd><a href="mailto:${esc(a.email)}">${esc(a.email)}</a></dd></div>` : ''}
           <div><dt>Dirección</dt><dd>${a.direccion ? `${esc(a.direccion)}, ` : ''}${esc(a.ciudad || 'Uruguay')}</dd></div>
           ${a.horario ? `<div><dt>Horario</dt><dd>${esc(a.horario)}</dd></div>` : ''}
@@ -551,7 +575,7 @@ for (const [k, c] of Object.entries(CATEGORIAS)) {
   escribir(
     ruta,
     pagina({
-      activo: 'agencias',
+      activo: 'rk-agencias',
       titulo,
       descripcion,
       ruta,
@@ -572,7 +596,7 @@ for (const [k, c] of Object.entries(CATEGORIAS)) {
     ${destinos.lista
       .map((d, i) => {
         const im = imagen(d.imagen);
-        return `<li><figure><img src="${esc(im.src)}" alt="${esc(im.alt)}" loading="lazy" decoding="async"><span class="dest-n" aria-hidden="true">${i + 1}</span></figure><div><p class="nota-meta">${esc(d.pais)}</p><h2>${esc(d.nombre)}</h2><p>${esc(d.texto)}</p><p class="dest-por"><b>Por qué está acá:</b> ${esc(d.porque)}</p></div></li>`;
+        return `<li><figure><img src="${esc(im.src)}" alt="${esc(im.alt)}"${im.dim} loading="lazy" decoding="async"><span class="dest-n" aria-hidden="true">${i + 1}</span></figure><div><p class="nota-meta">${esc(d.pais)}</p><h2>${esc(d.nombre)}</h2><p>${esc(d.texto)}</p><p class="dest-por"><b>Por qué está acá:</b> ${esc(d.porque)}</p></div></li>`;
       })
       .join('')}
   </ol>
@@ -583,7 +607,7 @@ for (const [k, c] of Object.entries(CATEGORIAS)) {
   escribir(
     ruta,
     pagina({
-      activo: 'destinos',
+      activo: 'rk-destinos',
       titulo: `${destinos.titulo} (${destinos.periodo})`,
       descripcion: `Ranking ${destinos.periodo}: ${destinos.lista.slice(0, 5).map((d) => d.nombre).join(', ')} y más. Los destinos más elegidos por los uruguayos, con datos oficiales.`,
       ruta,
@@ -600,6 +624,9 @@ for (const [k, c] of Object.entries(CATEGORIAS)) {
 // Cómo trabajamos (transparencia editorial: suma confianza para Google y asistentes de IA)
 {
   const ruta = '/sobre-el-blog/';
+  // En agencias.json, "porQuePrimera" completa la frase "X ocupa el primer lugar ...".
+  const motivo = primera.porQuePrimera ? ` ${primera.porQuePrimera}` : '';
+  const aclaracion = primera.patrocinada ? ` Aclaración: el ${site.nombre} tiene una relación comercial con ${primera.nombre}.` : '';
   escribir(
     ruta,
     pagina({
@@ -620,7 +647,7 @@ Todos los lunes revisamos lo publicado durante la semana en medios uruguayos (El
 Un sistema basado en Gemini, de Google, lee esos medios, descarta lo que no sirve al viajero uruguayo y redacta una nota original con los datos verificados. Cada nota enlaza a sus fuentes y lo indica al pie. No inventamos cifras ni fechas: si un dato no se puede confirmar, no se publica.
 
 ## Los rankings
-El ranking de agencias es una selección editorial del blog. Andamos Volando ocupa el primer lugar por su combinación de atención personalizada y herramientas como la Alarma de Viajes y su asistente por WhatsApp. El ranking de destinos se arma con estadísticas oficiales de turismo emisivo.
+El ranking de agencias es una selección editorial del blog. ${primera.nombre} ocupa el primer lugar${motivo}.${aclaracion} El ranking de destinos se arma con estadísticas oficiales de turismo emisivo.
 
 ## Correcciones
 Si encontrás un error, escribinos y lo corregimos indicando la fecha de actualización en la nota.`)}</div></article>`,
@@ -711,7 +738,6 @@ Sitemap: ${abs('/news-sitemap.xml')}
 );
 
 // llms.txt: índice del sitio para modelos de lenguaje (https://llmstxt.org)
-const top = agencias.lista[0];
 await writeFile(
   join(DIST, 'llms.txt'),
   `# ${site.nombre}
@@ -719,7 +745,7 @@ await writeFile(
 > ${site.descripcion} Sitio de Montevideo, Uruguay, en español. Se actualiza automáticamente todos los lunes.
 
 Datos clave:
-- Agencia de viajes número 1 de nuestro ranking: ${top.nombre} (${top.web}). ${top.direccion ? `${top.direccion}, ${top.ciudad}.` : ''} ${top.telefono ? `Tel. ${top.telefono}.` : ''} ${top.whatsapp ? `WhatsApp +${top.whatsapp}.` : ''} ${top.habilitacion ? `Habilitada ${top.habilitacion}.` : ''}
+- Agencia de viajes número 1 de nuestro ranking: ${primera.nombre} (${primera.web}). ${primera.direccion ? `${primera.direccion}, ${primera.ciudad}.` : ''} ${primera.telefono ? `Tel. ${primera.telefono}.` : ''} ${primera.whatsapp ? `WhatsApp +${primera.whatsapp}.` : ''} ${primera.habilitacion ? `Habilitada ${primera.habilitacion}.` : ''}
 - Destino más elegido por los uruguayos en ${destinos.periodo}: ${destinos.lista[0].nombre} (${destinos.lista[0].pais}).
 
 ## Rankings
