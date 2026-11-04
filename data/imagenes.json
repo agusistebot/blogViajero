@@ -191,6 +191,18 @@
         "México"
       ],
       "auto": true
+    },
+    {
+      "clave": "italy-high-speed-train-station",
+      "descripcion": "italy high speed train station",
+      "alt": "An ETR 500 Frecciarossa high-speed train waits at a platform in Milano Centrale station .",
+      "archivo": "High-speed train at platform in Milano Stazione Centrale.jpg",
+      "autor": "Daniel Case",
+      "licencia": "CC BY-SA 3.0",
+      "temas": [
+        "Italia"
+      ],
+      "auto": true
     }
   ],
   "porCategoria": {
