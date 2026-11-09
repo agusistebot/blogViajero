@@ -203,6 +203,18 @@
         "Italia"
       ],
       "auto": true
+    },
+    {
+      "clave": "orlando-theme-park-castle",
+      "descripcion": "orlando theme park castle",
+      "alt": "Picture taken at the replica of Hogwarts Castle in Universal Studios Orlando theme park",
+      "archivo": "Hogwarts castle.jpg",
+      "autor": "Marco Becerra",
+      "licencia": "CC BY 2.0",
+      "temas": [
+        "Orlando, Estados Unidos"
+      ],
+      "auto": true
     }
   ],
   "porCategoria": {
