@@ -215,6 +215,18 @@
         "Orlando, Estados Unidos"
       ],
       "auto": true
+    },
+    {
+      "clave": "machu-picchu-cusco-peru",
+      "descripcion": "machu picchu cusco peru",
+      "alt": "The Macchu Picchu , a UNESCO World Heritage Site near Cusco in Peru , at twilight.",
+      "archivo": "80 - Machu Picchu - Juin 2009 - edit.jpg",
+      "autor": "Martin St-Amant ( S23678 )",
+      "licencia": "CC BY-SA 3.0",
+      "temas": [
+        "Perú"
+      ],
+      "auto": true
     }
   ],
   "porCategoria": {
